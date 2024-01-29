@@ -345,7 +345,7 @@
                                                 <div class="form-group mb-1 cust-switch">
                                                 Disable / Enable
                                                 <div class="custom-control custom-switch">
-                                                <input type="checkbox" id="customSwitch018" class="is-switch custom-control-input" name="ignoreautoswitch" value="" <?php if($matches->ignoreautoswitch == '1'|| $matches->ignoreautoswitch == ''){?> checked <?php } ?> >
+                                                <input type="checkbox" id="customSwitch018" class="is-switch custom-control-input" name="ignoreautoswitch" value="1" <?php if($matches->ignoreautoswitch == '1'|| $matches->ignoreautoswitch == ''){?> checked <?php } ?> >
                                                 <label class="custom-control-label" for="customSwitch018"></label>
                                                 </div>
                                                 </div>

@@ -1249,8 +1249,8 @@ class Event extends CI_Controller
 					$updateData_lang = array();
 					$updateData_lang['match_name'] = trim($this->input->post('matchname'));
 					$updateData_lang['match_label'] = trim($this->input->post('match_label'));
-					// $updateData_lang['store_id'] =$this->session->userdata('storefront')->admin_id;
-					pr($this->session->all_userdata());die;
+					$updateData_lang['store_id'] =$this->session->userdata('storefront')->admin_id;
+
 					$updateData_lang['seo_keywords'] = trim($this->input->post('seo_keywords'));
 					$this->General_Model->update('match_info_lang',
 					 array(
@@ -1259,6 +1259,7 @@ class Event extends CI_Controller
 					 		'store_id' => $this->session->userdata('storefront')->admin_id
 					 	), $updateData_lang);
 
+					
 					$this->db->delete('banned_countries_match', array('match_id' => $matchId));
 
 					$bancountry_ids = $this->input->post('bcountry');
@@ -1478,7 +1479,7 @@ class Event extends CI_Controller
 					} else {
 
 						$match_url = base_url() . 'event/matches/add_match/' . base64_encode(json_encode($matchId)) . '';
-						$this->General_Model->update('match_info_lang', array('match_id' => $matchId, 'language' => $this->session->userdata('language_code')), $updateData_lang);
+						// $this->General_Model->update('match_info_lang', array('store_id' => $this->session->userdata('storefront')->admin_id,'match_id' => $matchId, 'language' => $this->session->userdata('language_code')), $updateData_lang);
 						$response = array('status' => 1, 'msg' => 'Match data updated Successfully.', 'redirect_url' => $match_url);
 						echo json_encode($response);
 						exit;
