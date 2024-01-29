@@ -1,3 +1,0 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-
-ERROR - 2023-11-15 04:19:45 --> Query error: Unknown column 'source_type' in 'field list' - Invalid query: INSERT INTO `api_events` (`event_name`, `tournament`, `category`, `stadium`, `team_a`, `team_b`, `match_date`, `match_date_time`, `tickets`, `merge_status`, `source_type`, `api_unique_id`, `tixstock_parent_category`, `tixstock_category`, `tixstock_tournament`, `tixstock_tournaments`, `match_found`) VALUES ('37 1A vs 2C (Dortmund) Euro 2024', '28', '1', '107', 'TBC Performer', 'TBC Performer2', '2024-06-29', '29 Jun 2024-20:00', 0, 0, 'tixstock', '01hf3yked3re8mt3tj60e7jksb', 'Euro 2024', 'undefined', 'undefined', NULL, 0)
