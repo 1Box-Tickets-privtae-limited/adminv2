@@ -1,0 +1,567 @@
+{
+    "data": [
+        {
+            "id": "01fwjxakqxatwcmfqvp8eza8h6",
+            "name": " Dutch Eredivisie",
+            "upcoming_events": 0,
+            "parent": [],
+            "children": []
+        },
+        {
+            "id": "01fwjxam33ekeemztfms5rg44e",
+            "name": "Alternative and Indie",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01gfjmjsw7fdz0mtcnpfh5vgbc",
+            "name": "American Football",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakkpy7yyh1jxjjanadbe",
+                "name": "Sports",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fx2fsepj2yr5h2mqhth2f2tn",
+            "name": "Boxing",
+            "upcoming_events": 0,
+            "parent": [],
+            "children": []
+        },
+        {
+            "id": "01fwjxam3t0r9ct2jm6n56zp4y",
+            "name": "Chart & Pop",
+            "upcoming_events": 1,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxam5xmz5chqmjpjqazrna",
+            "name": "Classical",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxam4xgptfwf30mrp3fa3n",
+            "name": "Club & Dance",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxam6dpjsgf7tjyyx1avkv",
+            "name": "Comedy",
+            "upcoming_events": 1,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01gg2pbwss67afw9ht3t8k43hn",
+            "name": "Concert",
+            "upcoming_events": 2,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxam7xx9yc3wqk1bqacf5d",
+            "name": "Concert Tickets",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxam6xp0zgjj52zyz88233",
+            "name": "Concerts Other",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxam5dqh6zt5bef81mv808",
+            "name": "Country & Folk",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxakyth2gy5bee4r0xk0s1",
+            "name": "Culture, Theatre & Arts",
+            "upcoming_events": 531,
+            "parent": [],
+            "children": []
+        },
+        {
+            "id": "01fwjxam0t0e7506299rcvt6dn",
+            "name": "EFL Cup",
+            "upcoming_events": 0,
+            "parent": [],
+            "children": []
+        },
+        {
+            "id": "01fwjxam4e0jvfrar87fa4xpz5",
+            "name": "Electronic",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxakp06qyq7vjnap5s1a10",
+            "name": "English Premier League",
+            "upcoming_events": 14,
+            "parent": [],
+            "children": []
+        },
+        {
+            "id": "01fwjxakw4ydxb743v8gqgmc9y",
+            "name": "Festivals",
+            "upcoming_events": 106,
+            "parent": [],
+            "children": []
+        },
+        {
+            "id": "01fwjxakj476pyj5g9ctvs8aj3",
+            "name": "Football",
+            "upcoming_events": 137,
+            "parent": {
+                "id": "01fwjxakkpy7yyh1jxjjanadbe",
+                "name": "Sports",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxakps5y9g844xvzcspsph",
+            "name": "French Ligue 1",
+            "upcoming_events": 0,
+            "parent": [],
+            "children": []
+        },
+        {
+            "id": "01fwjxam05s27nbqxate6we8b3",
+            "name": "German Bundesliga",
+            "upcoming_events": 81,
+            "parent": [],
+            "children": []
+        },
+        {
+            "id": "01fwjxam192fdrvv3gm1m61jh4",
+            "name": "Hard Rock Metal",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxam8xfxe0z6sa97fjad4y",
+            "name": "International Festivals",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxakqc5smgb5gqyeyj2pmf",
+            "name": "Italian Serie A",
+            "upcoming_events": 42,
+            "parent": [],
+            "children": []
+        },
+        {
+            "id": "01fwjxam8dwrvdv0wdv20cty0d",
+            "name": "K Pop",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01ga43dt2aczhnj2xas4bcv9kg",
+            "name": "Motorsports",
+            "upcoming_events": 3,
+            "parent": {
+                "id": "01fwjxakkpy7yyh1jxjjanadbe",
+                "name": "Sports",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxakx19dzyrmeare1p0gsa",
+            "name": "Music",
+            "upcoming_events": 2156,
+            "parent": [],
+            "children": [
+                {
+                    "id": "01fwjxam192fdrvv3gm1m61jh4",
+                    "name": "Hard Rock Metal",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam1t7ths6war49hp9aw3",
+                    "name": "Rock & Pop",
+                    "upcoming_events": 597,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam2gj18a5yr3evt42hb4",
+                    "name": "Rap / Hip Hop / Reggae",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam33ekeemztfms5rg44e",
+                    "name": "Alternative and Indie",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam3t0r9ct2jm6n56zp4y",
+                    "name": "Chart & Pop",
+                    "upcoming_events": 1,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam4e0jvfrar87fa4xpz5",
+                    "name": "Electronic",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam4xgptfwf30mrp3fa3n",
+                    "name": "Club & Dance",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam5dqh6zt5bef81mv808",
+                    "name": "Country & Folk",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam5xmz5chqmjpjqazrna",
+                    "name": "Classical",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam6dpjsgf7tjyyx1avkv",
+                    "name": "Comedy",
+                    "upcoming_events": 1,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam6xp0zgjj52zyz88233",
+                    "name": "Concerts Other",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam7dzb7hf4p4vadxkmnt",
+                    "name": "Nightlife",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam7xx9yc3wqk1bqacf5d",
+                    "name": "Concert Tickets",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam8dwrvdv0wdv20cty0d",
+                    "name": "K Pop",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam8xfxe0z6sa97fjad4y",
+                    "name": "International Festivals",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam9cn9t510cc5jk6qqbb",
+                    "name": "Theatre Tickets",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxam9xxs2hmj3xvq3gwzfw",
+                    "name": "World Music",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxamacn5fq1b67y84v9d2y",
+                    "name": "UK Festivals",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxamax3gh6as683kejt69v",
+                    "name": "Tours",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxambdw5t72rannye8211q",
+                    "name": "R+B Urban Soul",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01fwjxambyhj65g7d0t997gsre",
+                    "name": "R&B",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01gfqe6q15rzt6kd0j7x2k3e8h",
+                    "name": "Theater and Arts",
+                    "upcoming_events": 0,
+                    "children": []
+                },
+                {
+                    "id": "01gg2pbwss67afw9ht3t8k43hn",
+                    "name": "Concert",
+                    "upcoming_events": 2,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "id": "01fwjxam7dzb7hf4p4vadxkmnt",
+            "name": "Nightlife",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxambyhj65g7d0t997gsre",
+            "name": "R&B",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxambdw5t72rannye8211q",
+            "name": "R+B Urban Soul",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxam2gj18a5yr3evt42hb4",
+            "name": "Rap / Hip Hop / Reggae",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxam1t7ths6war49hp9aw3",
+            "name": "Rock & Pop",
+            "upcoming_events": 597,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxakkpy7yyh1jxjjanadbe",
+            "name": "Sports",
+            "upcoming_events": 709,
+            "parent": [],
+            "children": [
+                {
+                    "id": "01fwjxakj476pyj5g9ctvs8aj3",
+                    "name": "Football",
+                    "upcoming_events": 137,
+                    "children": []
+                },
+                {
+                    "id": "01ga43dt2aczhnj2xas4bcv9kg",
+                    "name": "Motorsports",
+                    "upcoming_events": 3,
+                    "children": []
+                },
+                {
+                    "id": "01gfjmjsw7fdz0mtcnpfh5vgbc",
+                    "name": "American Football",
+                    "upcoming_events": 0,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "id": "01gfqe6q15rzt6kd0j7x2k3e8h",
+            "name": "Theater and Arts",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxam9cn9t510cc5jk6qqbb",
+            "name": "Theatre Tickets",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxamax3gh6as683kejt69v",
+            "name": "Tours",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxakt8x7kwza4dd8tqbmgm",
+            "name": "UEFA Champions League",
+            "upcoming_events": 0,
+            "parent": [],
+            "children": []
+        },
+        {
+            "id": "01fwjxamacn5fq1b67y84v9d2y",
+            "name": "UK Festivals",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        },
+        {
+            "id": "01fwjxam9xxs2hmj3xvq3gwzfw",
+            "name": "World Music",
+            "upcoming_events": 0,
+            "parent": {
+                "id": "01fwjxakx19dzyrmeare1p0gsa",
+                "name": "Music",
+                "parent": []
+            },
+            "children": []
+        }
+    ],
+    "meta": {
+        "mode": "Sandbox",
+        "type": "partner.categories.get",
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "links": [
+            {
+                "url": null,
+                "label": "Previous",
+                "active": false
+            },
+            {
+                "url": "https://sandbox-pf.tixstock.com/v1/categories/feed?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "Next",
+                "active": false
+            }
+        ],
+        "path": "https://sandbox-pf.tixstock.com/v1/categories/feed",
+        "per_page": 50,
+        "to": 38,
+        "total": 38,
+        "request_id": "01gvqr1ped6dr8n1r6x5t3778z"
+    },
+    "links": {
+        "first": "https://sandbox-pf.tixstock.com/v1/categories/feed?page=1",
+        "last": "https://sandbox-pf.tixstock.com/v1/categories/feed?page=1",
+        "prev": null,
+        "next": null
+    }
+}

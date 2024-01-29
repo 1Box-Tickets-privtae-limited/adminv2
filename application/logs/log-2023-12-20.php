@@ -1,0 +1,10 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2023-12-20 06:30:38 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-20 06:30:39 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-20 06:31:20 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-20 06:31:22 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-20 06:32:08 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-20 07:42:16 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-20 07:42:16 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-20 20:26:50 --> Severity: error --> Exception: fwrite(): Argument #2 ($data) must be of type string, array given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Tixstock.php 1316

@@ -1,0 +1,12 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2023-12-05 12:17:38 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-05 12:18:56 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-05 12:19:01 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-05 12:19:01 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-05 12:27:47 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-05 12:28:05 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-05 12:30:49 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-05 12:30:54 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-05 12:31:57 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762
+ERROR - 2023-12-05 12:31:58 --> Severity: error --> Exception: count(): Argument #1 ($value) must be of type Countable|array, bool given /home/720521.cloudwaysapps.com/nbvnkuybmm/public_html/1bx/admin_v2/application/controllers/Event.php 762

@@ -1,0 +1,3 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2023-11-14 16:13:39 --> Query error: Unknown column 'source_type' in 'field list' - Invalid query: INSERT INTO `api_events` (`event_name`, `tournament`, `category`, `stadium`, `team_a`, `team_b`, `match_date`, `match_date_time`, `tickets`, `merge_status`, `source_type`, `api_unique_id`, `tixstock_parent_category`, `tixstock_category`, `tixstock_tournament`, `tixstock_tournaments`, `match_found`) VALUES ('47 W43 vs W44 (Berlin) Quarter Finals Euro 2024', '28', '1', '177', 'TBC Performer', 'TBC Performer2', '2024-07-06', '06 Jul 2024-20:00', 0, 0, 'tixstock', '01hf75rv261qjknfbbqhew5hc5', 'Euro 2024', 'undefined', 'undefined', NULL, 0)
