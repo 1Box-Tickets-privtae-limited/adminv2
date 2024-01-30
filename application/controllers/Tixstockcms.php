@@ -621,14 +621,22 @@ public function updateFeedsEvents($proceed = false)
                                 $response['next'] = 1;
                                 echo json_encode($response);exit;
                             }
-                             else if($tournament_category[0]->category == "" && $tournament_data->category != "Rugby World Cup"){
-                                 $main_category = 1;
-                                 $parent_tournament_name = $tournament_category[0]->tournament_name;
-                             }
-                            else{
+                            else if($tournament_category[0]->category != ""){
                                 $main_category = $tournament_category[0]->category;
                                 $parent_tournament_name = $tournament_category[0]->tournament_name;
                             }
+                            else{
+                                $main_category = 1;
+                                $parent_tournament_name = $tournament_category[0]->tournament_name;
+                            }
+                            //  else if($tournament_category[0]->category == "" && $tournament_data->category != "Rugby World Cup"){
+                            //      $main_category = 1;
+                            //      $parent_tournament_name = $tournament_category[0]->tournament_name;
+                            //  }
+                            // else{
+                            //     $main_category = $tournament_category[0]->category;
+                            //     $parent_tournament_name = $tournament_category[0]->tournament_name;
+                            // } 
                             
                             $listings     = $data['listings'];
                             $total_tickets = array();
@@ -640,7 +648,7 @@ public function updateFeedsEvents($proceed = false)
                             $venues     = $data['venue'];
                             $stadium_id = $this->updateVenues($data,$main_category);
 
-                            if(count($data['performers']) > 1){
+                            if(count($data['performers']) >= 1){
 
                         $unform_match_name      = explode('-',$data['name']);
                         $unformted_match_name   = trim($unform_match_name[0]);
@@ -779,24 +787,24 @@ public function updateFeedsEvents($proceed = false)
                         $boxoffice_match_id_2        = $this->updateApiEvents($data,$boxoffice_tournament_id,$boxoffice_team_b,$boxoffice_team_a,$boxoffice_stadium_id,$event_type);
 
                         if($boxoffice_match_id != "" && $boxoffice_match_id_2 != ""){
-                        	 $boxoffice_match_id_new_a        = $this->updateApiEvents($data,$boxoffice_tournament_id,$boxoffice_team_a,$boxoffice_team_b,$boxoffice_stadium_id,$event_type,1);
-                        	 if($boxoffice_match_id_new_a == ""){
-                        	 	 $boxoffice_match_id_new_b        = $this->updateApiEvents($data,$boxoffice_tournament_id,$boxoffice_team_b,$boxoffice_team_a,$boxoffice_stadium_id,$event_type,1);
-                        	 	 $boxoffice_match_id = $boxoffice_match_id_new_b;
-                        	 	 if($boxoffice_match_id != ""){
-	                                $t1 = $team_1_name;
-	                                $t2 = $team_2_name;
-	                                $team_1_name = $t2;
-	                                $team_2_name = $t1;
-                            	}
-                        	 }
-                        	 else{
-                        	 	 $boxoffice_match_id = $boxoffice_match_id_new_a;
-                        	 }
+                             $boxoffice_match_id_new_a        = $this->updateApiEvents($data,$boxoffice_tournament_id,$boxoffice_team_a,$boxoffice_team_b,$boxoffice_stadium_id,$event_type,1);
+                             if($boxoffice_match_id_new_a == ""){
+                                 $boxoffice_match_id_new_b        = $this->updateApiEvents($data,$boxoffice_tournament_id,$boxoffice_team_b,$boxoffice_team_a,$boxoffice_stadium_id,$event_type,1);
+                                 $boxoffice_match_id = $boxoffice_match_id_new_b;
+                                 if($boxoffice_match_id != ""){
+                                    $t1 = $team_1_name;
+                                    $t2 = $team_2_name;
+                                    $team_1_name = $t2;
+                                    $team_2_name = $t1;
+                                }
+                             }
+                             else{
+                                 $boxoffice_match_id = $boxoffice_match_id_new_a;
+                             }
                         }
                         else if($boxoffice_match_id == "" && $boxoffice_match_id_2 != ""){
-                        	$boxoffice_match_id = $boxoffice_match_id_2;
-                        	if($boxoffice_match_id_2 != ""){
+                            $boxoffice_match_id = $boxoffice_match_id_2;
+                            if($boxoffice_match_id_2 != ""){
                                 $t1 = $team_1_name;
                                 $t2 = $team_2_name;
                                 $team_1_name = $t2;
@@ -827,7 +835,7 @@ public function updateFeedsEvents($proceed = false)
                         }
 
                         if($data['id'] == "01hhytcfrjjk3c6wtjzm8dywb7"){
-                        	//echo 'boxoffice_match_id = '.$boxoffice_match_id;exit;
+                            //echo 'boxoffice_match_id = '.$boxoffice_match_id;exit;
                         }
                                 
                         
@@ -2057,11 +2065,11 @@ error_reporting(E_ALL);*/
                                 $response['next'] = 1;
                                 echo json_encode($response);exit;
                             }
-                            else if($tournament_category[0]->category == "" && ($data['category']['name'] == "International Friendlies" || $data['category']['name'] == "Rest of the World Domestic Football")){
-                               $main_category = 1;
+                            else if($tournament_category[0]->category != ""){
+                                $main_category = $tournament_category[0]->category;
                             }
                             else{
-                                $main_category = $tournament_category[0]->category;
+                                $main_category = 1;
                             } 
                             
                  /*           */
@@ -2071,11 +2079,9 @@ error_reporting(E_ALL);*/
                             $venues     = $data['venue'];
                             $venue_data = $this->updateVenues($data,$main_category);
                             
-                              
-                            
                             //$performers     = $data['performers'];
 
-                            if(count($data['performers']) > 1){
+                            if(count($data['performers']) >= 1){
 
                         $performer_data = $this->updatePerformers($data,$main_category);
 
