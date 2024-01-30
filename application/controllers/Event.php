@@ -2949,7 +2949,8 @@ class Event extends CI_Controller
 
 		$teams .= '<option value="">Select Team 1</option>';
 		foreach($records as $record ){
-		  $teams .= '<option value="'.$record->id.'">'.$record->team_name." ( ".$record->source_type." )".'</option>';
+			if($record->team_name!="")
+				  $teams .= '<option value="'.$record->id.'">'.$record->team_name." ( ".$record->source_type." )".'</option>';
 		}
 
 		$stadiums .= '<option value="">Select Venue</option>';
