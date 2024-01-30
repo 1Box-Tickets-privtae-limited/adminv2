@@ -862,7 +862,7 @@ color: #00a3ed !important;
 										</div>
 									<?php //}
 								} ?>
-									<?php  if(($eticketDatas[0]->ticket_status == 0 || $eticketDatas[0]->ticket_status == 2 || $eticketDatas[0]->ticket_status == 1) && ($orderData->ticket_type == 3 || $orderData->ticket_type == 4 || $orderData->ticket_type == 1)){ 
+									<?php  if(($eticketDatas[0]->ticket_status == 0 || $eticketDatas[0]->ticket_status == 2 || $eticketDatas[0]->ticket_status == 1) && ($orderData->ticket_type == 3 || $orderData->ticket_type == 4 || $orderData->ticket_type == 1 || $orderData->ticket_type == 2)){ 
 										$tracking_data = 		$this->General_Model->getAllItemTable_Array('booking_ticket_tracking', array('booking_id' => $eticketDatas[0]->booking_id))->result();
 										?>
 										<?php 
@@ -934,13 +934,22 @@ color: #00a3ed !important;
 								<div class="form-group mt-3 mb-0">
 									
 
-									<?php if($tracking_data[0]->source_type == "tixstock") { ?>
+									<?php 
+									$urlexists = parse_url($tracking_data[0]->pod);
 
-                          				 <a target="_blank" href="javascript:void(0);" onclick="return popitup('<?php echo $tracking_data[0]->pod;?>')"><?php echo $tracking_data[0]->pod;?></a>
+									if ($urlexists['scheme'] == 'https' || $urlexists['scheme'] == 'http') {
+									$pod_file    = $tracking_data[0]->pod;
+									}
+									else{
+									$pod_file	 = TICKET_UPLOAD_PATH.'uploads/pod/'.$tracking_data[0]->pod;
+									}
+									if($tracking_data[0]->source_type == "tixstock") { ?>
+
+                          				 <a target="_blank" href="javascript:void(0);" onclick="return popitup('<?php echo $pod_file;?>')"><?php echo $tracking_data[0]->pod;?></a>
 
                           				<?php } else if($tracking_data[0]->source_type == "1boxoffice") { ?>
                           				
-                          				<a target="_blank" href="javascript:void(0);" onclick="return popitup('<?php echo TICKET_UPLOAD_PATH.'uploads/pod/'.$tracking_data[0]->pod;?>')"><?php echo $tracking_data[0]->pod;?></a>
+                          				<a target="_blank" href="javascript:void(0);" onclick="return popitup('<?php echo $pod_file;?>')"><?php echo $tracking_data[0]->pod;?></a>
                           				<?php } ?>
 
 
