@@ -143,7 +143,7 @@ z-index: 9999;
                                  </div>
 
                                  <?php 
-                                 if($event->tournament >0 )
+                                 if($event->other_event_category ==14 )
                                     $display_tournament="block";
                                  else
                                  $display_tournament="none";
@@ -1351,7 +1351,7 @@ function slugfly(str) {
 
   return str;
 }
-<?php if(empty($event->m_id)) { ?>
+<?php //if(empty($event->m_id)) { ?>
             $("body").on("keyup","#eventname",function(){
 
             category_id=$('#category option:selected').val();
@@ -1370,7 +1370,7 @@ function slugfly(str) {
                $("#event_url").val(slug+"-tickets")
             }
             });
-<?php } ?>
+<?php //} ?>
 
 new Choices(document.getElementById("choices2"), { delimiter: ",", editItems: !0, removeItemButton: !0 });
 
