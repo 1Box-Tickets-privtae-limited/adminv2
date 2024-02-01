@@ -1,4 +1,5 @@
 <?php 
+//test
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 error_reporting(0);
 class Tixstock extends CI_Controller {
@@ -1356,7 +1357,7 @@ function webhooks()
 
         $fp = fopen("tix_logs/webhooks/".$webhooks_type."/".$file_name.'.txt', 'a+');
         ftruncate($fp, 0);
-        fwrite($fp, $tixstock_response);
+        fwrite($fp, $payload);
         fclose($fp);
 
          $total_tickets = $this->General_Model->getAllItemTable_Array('booking_etickets', array('booking_id' => $booking->bg_id))->num_rows();
@@ -1378,8 +1379,8 @@ function webhooks()
                 if(!empty($mobile_link)){
 
                 $table                     = "booking_etickets";
-                $wheresv1                  = array('booking_id' => $booking->bg_id,'qr_link' => '','serial' => trim($mobile_link['seat']));
-                $uvalue                    = array('qr_link' => trim($mobile_link['link']),'ticket_status' => 1,'seat' => $seat);
+                $wheresv1                  = array('booking_id' => $booking->bg_id,'qr_link' => '','serial' => trim(@$mobile_link['seat']));
+                $uvalue                    = array('qr_link' => trim(@$mobile_link['link']),'ticket_status' => 1,'seat' => $seat);
                 $ticket_update             =  $this->Tixstock_Model->update_table($table, $wheresv1, $uvalue);
 
                 }
