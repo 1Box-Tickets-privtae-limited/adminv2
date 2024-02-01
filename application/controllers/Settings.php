@@ -4754,7 +4754,7 @@ $this->data['segment']=$seg;
 	}
 	public function timage_file_check()
 	{
-		$allowed_mime_types = array('image/jpeg', 'image/svg+xml', 'image/png', 'image/gif');
+		$allowed_mime_types = array('image/jpeg', 'image/svg+xml', 'image/png', 'image/gif','image/webp');
 		if (isset($_FILES['tournament_image']['name']) && $_FILES['tournament_image']['name'] != "") {
 			$mime = get_mime_by_extension($_FILES['tournament_image']['name']);
 			$fileAr = explode('.', $_FILES['tournament_image']['name']);
@@ -4772,7 +4772,7 @@ $this->data['segment']=$seg;
 	}
 	public function bg_image_file_check()
 	{
-		$allowed_mime_types = array('image/jpeg', 'image/svg+xml', 'image/png', 'image/gif');
+		$allowed_mime_types = array('image/jpeg', 'image/svg+xml', 'image/png', 'image/gif','image/webp');
 		if (isset($_FILES['team_bg']['name']) && $_FILES['team_bg']['name'] != "") {
 			$mime = get_mime_by_extension($_FILES['team_bg']['name']);
 			$fileAr = explode('.', $_FILES['team_bg']['name']);
@@ -4790,7 +4790,7 @@ $this->data['segment']=$seg;
 	}
 	public function image_file_check()
 	{
-		$allowed_mime_types = array('image/jpeg', 'image/svg+xml', 'image/png', 'image/gif');
+		$allowed_mime_types = array('image/jpeg', 'image/svg+xml', 'image/png', 'image/gif','image/webp');
 		if (isset($_FILES['team_image']['name']) && $_FILES['team_image']['name'] != "") {
 			$mime = get_mime_by_extension($_FILES['team_image']['name']);
 			$fileAr = explode('.', $_FILES['team_image']['name']);
@@ -7911,7 +7911,7 @@ $this->data['segment']=$seg;
 		if (!empty($_FILES['file']['name'])) {
 			$config['upload_path'] = UPLOAD_PATH_PREFIX . 'uploads/temp';
 
-			$config['allowed_types'] = 'jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF|';
+			$config['allowed_types'] = 'jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF|webp';
 			$config['max_size'] = '10000';
 			$config['encrypt_name'] = TRUE;
 			$this->load->library('upload', $config);
@@ -8969,10 +8969,9 @@ $this->data['segment']=$seg;
 
 					$insertData = array();
 					if ($this->form_validation->run() !== false) {
-
 						if (!empty($_FILES['tournament_image']['name'])) {
 							$config['upload_path'] = UPLOAD_PATH_PREFIX .'uploads/seo_venue';
-							$config['allowed_types'] = 'jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF|';
+							$config['allowed_types'] = 'jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF|webp';
 							//$config['max_size'] = '10000';
 							$config['encrypt_name'] = TRUE;
 							$this->load->library('upload', $config);
@@ -8991,7 +8990,7 @@ $this->data['segment']=$seg;
 
 							if (!empty($_FILES['venue_icon']['name'])) {
 								$config['upload_path'] = UPLOAD_PATH_PREFIX .'uploads/seo_venue_icon';
-								$config['allowed_types'] = 'jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF|';
+								$config['allowed_types'] = 'jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF|webp';
 								//$config['max_size'] = '10000';
 								$config['encrypt_name'] = TRUE;
 								$this->upload->initialize($config); // Re-initialize the upload library
@@ -9019,8 +9018,7 @@ $this->data['segment']=$seg;
 							$insertData['top_venue'] = !empty($top_venueIds) ? implode(',', $top_venueIds) : '';			
 					//	}	
 						$insertData['status'] = $this->input->post('status') ? 1 : 0;
-						$insertData['top_venue_status'] = $this->input->post('top_venue_status') ? 1 : 0;					
-					
+						$insertData['top_venue_status'] = $this->input->post('top_venue_status') ? 1 : 0;		
 						$t_id = $this->General_Model->insert_data('seo_venue_list', $insertData);						
 
 						//Add to language table
