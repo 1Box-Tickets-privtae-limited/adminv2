@@ -1389,7 +1389,10 @@ function webhooks()
 
     
 
-             $updated_tickets = $this->General_Model->getAllItemTable_Array('booking_etickets', array('booking_id' => $booking->bg_id,'ticket_status' => 1))->num_rows();
+            $uploaded_tickets_count = $this->General_Model->getAllItemTable_Array('booking_etickets', array('booking_id' => $booking->bg_id,'ticket_status' => 1))->num_rows();
+            $approved_tickets_count = $this->General_Model->getAllItemTable_Array('booking_etickets', array('booking_id' => $booking->bg_id,'ticket_status' => 2))->num_rows();
+
+            $updated_tickets = $uploaded_tickets_count + $approved_tickets_count;
 
             $pending_tickets = $this->General_Model->getAllItemTable_Array('booking_etickets', array('booking_id' => $booking->bg_id,'qr_link' => ''))->num_rows();
 
