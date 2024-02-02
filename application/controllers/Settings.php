@@ -9087,7 +9087,7 @@ $this->data['segment']=$seg;
 								unlink(@UPLOAD_PATH_PREFIX .'uploads/seo_venue/' . $teamdata->venue_image);
 							}
 							$config['upload_path'] = UPLOAD_PATH_PREFIX.'uploads/seo_venue';
-							$config['allowed_types'] = 'jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF|';
+							$config['allowed_types'] = 'jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF|webp';
 							$config['encrypt_name'] = TRUE;
 							$this->load->library('upload', $config);
 							if (!$this->upload->do_upload('tournament_image')) {
@@ -9120,7 +9120,7 @@ $this->data['segment']=$seg;
 								unlink(@UPLOAD_PATH_PREFIX .'uploads/seo_venue_icon/' . $teamdata->venue_icon);
 							}
 							$config['upload_path'] = UPLOAD_PATH_PREFIX.'uploads/seo_venue_icon';
-							$config['allowed_types'] = 'jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF|';
+							$config['allowed_types'] = 'jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF|webp';
 							//$config['max_size'] = '1000';
 							$config['encrypt_name'] = TRUE;
 							$this->load->library('upload', $config);
