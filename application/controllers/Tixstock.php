@@ -1411,6 +1411,45 @@ function webhooks()
              echo json_encode($response);exit;
 
             }
+            else if($ticket_type == "order.paper_ticket_fulfilment"){
+
+            $paper_ticket_details                      = $tixstock_response['data']['paper_ticket_details'];
+
+            $file_name = $booking->booking_no;
+            $fp = fopen("tix_logs/webhooks/".$webhooks_type."/".$file_name.'_request.json', 'a+');
+            ftruncate($fp, 0);
+            fwrite($fp, $payload);
+            fclose($fp);
+
+            $fp = fopen("tix_logs/webhooks/".$webhooks_type."/".$file_name.'.txt', 'a+');
+            ftruncate($fp, 0);
+            fwrite($fp, $payload);
+            fclose($fp);
+
+            if(!empty($paper_ticket_details)){
+
+            $table                     = "booking_ticket_tracking";
+            $wheresv1                  = array('booking_id' => $booking->bg_id);
+            $uvalue                    = array('tracking_number' => $paper_ticket_details['shipping_tracking_id'],'delivery_provider' => $paper_ticket_details['delivery_partner_name'],'pod_status' => 1);
+            $ticket_update             =  $this->Tixstock_Model->update_table($table, $wheresv1, $uvalue);
+            $this->ticket_fullfillment_notification($booking->bg_id);
+            }
+       
+            $completed_tickets = $this->General_Model->getAllItemTable_Array('booking_ticket_tracking', array('booking_id' => $booking->bg_id))->row();
+
+            if($completed_tickets->tracking_number != '' && $completed_tickets->delivery_provider != ''){
+
+                 $response = array('external_id' => $booking_no,"order_status" => "Shipped","message" => "Listing has been fulfilled for the order.","success" => true);
+
+            }
+            else{
+
+                $response = array('external_id' => $booking_no,"order_status" => "Accepted","message" => "Tickets need to be fullfilled.","success" => false );
+            }
+            
+             echo json_encode($response);exit;
+
+            }
             else{
 
             }
