@@ -2478,7 +2478,7 @@ public function get_order_status(){
 		$bg_id = $_POST['bg_id'];
 		if ( $bg_id!="") {
 			$tickets = $this->General_Model->getAllItemTable_Array('booking_global', array('md5(bg_id)' => $_POST['bg_id']))->row();
-			if (($tickets->booking_status == 4 || $tickets->booking_status == 5) && $tickets->source_type=="1boxoffice") {
+			if (($tickets->booking_status == 4 || $tickets->booking_status == 5) ) {
 				$post_data = array("bg_id" => $tickets->bg_id);
 				$handle = curl_init();
 				$url = API_CRON_URL.'admin-transfer-email-notfication';
