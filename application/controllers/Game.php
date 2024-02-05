@@ -2473,6 +2473,40 @@ public function get_order_status(){
 			}
 	}
 
+	public function send_transfer_email()
+	{
+		$bg_id = $_POST['bg_id'];
+		if ( $bg_id!="") {
+			$tickets = $this->General_Model->getAllItemTable_Array('booking_global', array('md5(bg_id)' => $_POST['bg_id']))->row();
+			if (($tickets->booking_status == 4 || $tickets->booking_status == 5) && $tickets->source_type=="1boxoffice") {
+				$post_data = array("bg_id" => $tickets->bg_id);
+				$handle = curl_init();
+				$url = API_CRON_URL.'admin-transfer-email-notfication';
+				curl_setopt($handle, CURLOPT_HTTPHEADER, array(
+				'domainkey: https://www.1boxoffice.com/en/'
+				));
+				curl_setopt($handle, CURLOPT_URL, $url);
+				curl_setopt($handle, CURLOPT_POST, 1);
+				curl_setopt($handle, CURLOPT_POSTFIELDS,$post_data);
+				curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+				$output = curl_exec($handle);
+				curl_close($handle);
+				$response = array('status' => 1, 'msg' => "Email Sent Successfully.");
+
+				echo json_encode($response);
+				exit;
+			} else {
+				$response = array('status' => 0, 'msg' => "Failed to sent Email.");
+				echo json_encode($response);
+				exit;
+			}
+		
+		} else {
+			$response = array('status' => 0, 'msg' => "Failed to sent Email.");
+			echo json_encode($response);
+			exit;
+		}
+	}
 	public function resend_email()
 	{
 				$ticket_type = $_POST['ticket_id'];
@@ -7914,6 +7948,7 @@ public function call_modal()
 	$_POST['data_sub_title'] = ($_POST['data_sub_title'] != "") ? $_POST['data_sub_title'] : "";
 	$_POST['data_yes'] = ($_POST['data_yes'] != "") ? $_POST['data_yes'] : "";
 	$_POST['data_no'] = ($_POST['data_no'] != "") ? $_POST['data_no'] : "";
+	$_POST['data_cancel_class'] = ($_POST['data_cancel_class'] != "") ? $_POST['data_cancel_class'] : "";
 	$_POST['data_btn'] = ($_POST['data_btn'] != "") ? $_POST['data_btn'] : "";
 	$_POST['data_target'] = ($_POST['data_target'] != "") ? $_POST['data_target'] : "";
 	$_POST['status'] = ($_POST['status'] != "") ? $_POST['status'] : "";
@@ -7926,6 +7961,7 @@ public function call_modal()
 	$this->data['modal_sub_title']=$_POST['data_sub_title'];
 	$this->data['modal_yes']=$_POST['data_yes'];
 	$this->data['modal_cancel']=$_POST['data_no'];
+	$this->data['modal_cancel_class']=$_POST['data_cancel_class'];
 	$this->data['modal_btn_id']=$_POST['data_btn'];
 	$this->data['modal_target']=$_POST['data_target'];
 	$this->data['status']=$_POST['status'];

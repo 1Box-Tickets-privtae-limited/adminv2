@@ -84,6 +84,7 @@ color: #00a3ed !important;
 									   <th class="fs-16">Delivery Status</th>
 									   <th class="fs-16">Booking Status</th>
 									   <th class="fs-16">Send Email</th>
+									   <th class="fs-16">Transfer</th>
 									   <th class="fs-16">Transaction Date</th>
 									   <th class="fs-16">Delivery Deadline</th>
 									   <th class="fs-16">E-Ticket</th>
@@ -181,13 +182,23 @@ color: #00a3ed !important;
 									</td>
 									<td>
 										  <div class="">
-								  <div class="content">
-									  <div class="custom-control custom-switch">
-										 <input name="sendmail" type="checkbox" class="custom-control-input" value="1" checked id="sendmail" >										
-										 <label class="custom-control-label" for="sendmail"></label>
-									   </div>
-								  </div>
-								</div>
+												<div class="content">
+													<div class="custom-control custom-switch">
+														<input name="sendmail" type="checkbox" class="custom-control-input" value="1" checked id="sendmail" >										
+														<label class="custom-control-label" for="sendmail"></label>
+													</div>
+												</div>
+										   </div>
+									  </td>
+									<td>
+										  <div class="">
+												<div class="content">
+													<div class="custom-control custom-switch">
+														<input name="transfer" type="checkbox" class="custom-control-input" value="1"  id="transfer"  href="javascript:void(0);"  data-toggle="modal" data-target="centermodal1"  data-title="Are you sure you want to send a email ?" data-sub-title="Email will go to the user if there is a status change !" data-yes="Yes, Send!" data-no="No, Cancel!" data-btn-id="transfer_email" >										
+														<label class="custom-control-label" for="transfer"></label>
+													</div>
+												</div>
+										   </div>
 									  </td>
 									   <td data-label="Transaction date:">
 										  <span class="tr_date">
@@ -1939,6 +1950,7 @@ $(".call_modals").change(function() {
 
 });
 	$(".call_modal").click(function() {
+
 		var data_title = $(this).attr('data-title');
 		var data_sub_title = $(this).attr('data-sub-title');
 		var data_yes = $(this).attr('data-yes');
@@ -1962,6 +1974,76 @@ $(".call_modals").change(function() {
 
 });
 
+$("body").on('click',' #transfer_email',function(e){
+	var data_close_modal = $(this).attr('data-close-modal');
+	var bg_id='<?php echo md5($orderData->bg_id); ?>';		   
+		$.ajax({
+			url: '<?php echo base_url();?>game/send_transfer_email',
+			type: 'POST',
+			dataType: "json",
+			data: {  bg_id:bg_id  },
+			success: function (response) { 
+				if(response.status==0)
+				{
+					$('input:checkbox#transfer').prop('checked', false);
+					swal('Updation Failed !', response.msg, 'error');
+				}
+				else
+				{
+					// $('#delivery_status_order').val(5);
+					swal('Updated !', response.msg, 'success');
+				}
+				$('#'+data_close_modal).modal("hide");  
+			},
+			error: function () {
+			console.log('Failed');
+			}
+		});
+	});
+
+	$("input:checkbox#transfer").click(function() {
+     var ischecked= $(this).is(':checked');	
+	 var booking_status='<?php echo $orderData->booking_status;?>';
+	 var source_type='<?php echo $orderData->source_type;?>';
+     if(ischecked && (booking_status==4 ||booking_status==5) && (source_type=="1boxoffice"))
+		{
+
+			var data_title = $(this).attr('data-title');
+		var data_sub_title = $(this).attr('data-sub-title');
+		var data_yes = $(this).attr('data-yes');
+		var data_no = $(this).attr('data-no');
+		var data_btn = $(this).attr('data-btn-id');
+		var data_target = $(this).attr('data-target');
+		var data_bg_id = $(this).attr('data-bg-id');
+		var data_cancel_class = 'transfer_cancel_class';
+		
+	$.ajax({
+			url: '<?php echo base_url();?>game/call_modal',
+			type: "POST",
+			data: {  "data_title": data_title ,"data_sub_title":data_sub_title, "data_yes":data_yes,"data_no":data_no,"data_btn":data_btn,"data_target":data_target ,"data_bg_id":data_bg_id,"data_cancel_class":data_cancel_class},
+			success: function (response) {  
+				$("#modal_content_ajax").html(response); 
+				 $('#'+data_target).modal("show");  
+				//$("#").modal('show');
+			},
+			error: function () {
+			}
+		});
+
+		}
+		else
+		{
+			swal('', "The Booking Status is 'Delivered' or 'Shipped,' and the Transfer is working.", 'error');
+			$(this).prop('checked', false);	
+		}
+}); 
+
+
+
+$("body").on('click',' .transfer_cancel_class ',function(e){
+	$('input:checkbox#transfer').prop('checked', false);	
+
+});
 $("body").on('click',' #update_modal_booking_status ',function(e){
 
 	var sendmail = $('#sendmail').is(":checked");
