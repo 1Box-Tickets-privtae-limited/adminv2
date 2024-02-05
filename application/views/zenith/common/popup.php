@@ -3,7 +3,7 @@
 		<div class="modal-content confirm_delivery">
 			<div class="modal-header">
 				<h4 class="modal-title" id="myCenterModalLabel"></h4>
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<button type="button" class="close <?php echo $modal_cancel_class; ?>" data-dismiss="modal" aria-hidden="true" >×</button>
 			</div>
 			<div class="modal-body">
 				<h5>
@@ -14,7 +14,7 @@
 				</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-light" data-dismiss="modal">
+				<button type="button" class="btn btn-light <?php echo $modal_cancel_class; ?>" data-dismiss="modal" >
 					<?php echo $modal_cancel; ?>
 				</button>
 				<button type="button" class="btn btn-primary" id="<?php echo $modal_btn_id; ?>"
