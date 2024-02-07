@@ -9051,7 +9051,9 @@ $this->data['segment']=$seg;
 				$seocountry_id =    $seocountryId;
 				//echo "<pre>";print_r($_POST);exit;
 				//if its an update request
-			
+			// echo '<pre/>';
+			// print_r($_FILES);
+			// exit;
 				if ($this->input->post()) {
 
 					if($_POST['flag'] != 'content' && $_POST['flag'] != 'page_content'){
@@ -9123,6 +9125,7 @@ $this->data['segment']=$seg;
 							$config['allowed_types'] = 'jpeg|jpg|png|gif|JPEG|JPG|PNG|GIF|webp';
 							//$config['max_size'] = '1000';
 							$config['encrypt_name'] = TRUE;
+							$this->upload->initialize($config); // Re-initialize the upload library
 							$this->load->library('upload', $config);
 							if (!$this->upload->do_upload('venue_icon')) {
 								$msg .= 'Failed to add Venue Icon';
