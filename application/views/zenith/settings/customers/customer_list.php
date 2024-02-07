@@ -269,7 +269,7 @@ body {
                                             <div class="dropdown">
                                                 <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Name<i class="mdi mdi-chevron-down"></i>
+                                                Name or Email<i class="mdi mdi-chevron-down"></i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownMenuButton">
                                                     <div id="view_project_list_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
