@@ -652,9 +652,10 @@ class General_Model extends CI_Model
 		}
 
 		if (!empty($search)) {
-			if($search['customer_name'] != ""){
-				 $this->db->like('register.first_name', $search['customer_name']);
-				 $this->db->or_like('register.last_name', $search['customer_name']);
+			if($search['customer_name'] != ""){				
+				//  $this->db->like('register.first_name', trim($search['customer_name']));
+				//  $this->db->or_like('register.last_name', trim($search['customer_name']));
+				 $this->db->like('CONCAT(first_name, " ", last_name, " ")', $search['customer_name'], 'both');
 			}
 	}
 
