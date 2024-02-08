@@ -672,8 +672,6 @@ class General_Model extends CI_Model
 
 		if (!empty($search)) {
 			if($search['country'] != ""){
-			//	$order_status_quotedString=array_map("strval",$search['country']); 
-			//	$this->db->where_in('countries.id', $order_status_quotedString);
 				$this->db->where_in('countries.id',$search['country']);
 			}
 		}
@@ -683,31 +681,15 @@ class General_Model extends CI_Model
 				$this->db->where('register.id',$search['customer_id']);
 			}
 		}
-
-        // $this->db->select('register.*,countries.sortname,states.name as state_name,countries.name as country_name')
-		//         ->from('register')
-		//         ->join('countries', 'countries.id = register.country')
-		// 		->join('states', 'states.id = register.state');
-
-        // $this->db->order_by('register.id', 'DESC');
-
-//cities.name as state_name,
 		$this->db->select('register.*,countries.sortname,countries.name as country_name')
 		->from('register')
-		->join('countries', 'countries.id = register.country');
-	//	->join('cities', 'cities.id = register.city');
+		->join('countries', 'countries.id = register.country', 'left');
 
 		$this->db->order_by('register.id', 'DESC');
 
 		if($row_per_page)
 			$this->db->limit($row_per_page, $row_no);
-
-
-        //$this->db->limit(100);
         $query = $this->db->get(); 
-
-		// if($row_per_page)
-       	 	//echo $this->db->last_query();die;
         return $query;
     }
     public function get_city_name($id)
