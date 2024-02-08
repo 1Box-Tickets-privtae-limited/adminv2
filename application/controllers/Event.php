@@ -860,31 +860,30 @@ class Event extends CI_Controller
 						$updateData_lang['description'] = trim($this->input->post('description'));
 						$updateData_lang['long_description'] = trim($this->input->post('long_description'));
 						$updateData_lang['seo_keywords'] = trim($this->input->post('seo_keywords'));
-						//$updateData_lang['short_description'] = trim($this->input->post('short_description'));
-						//echo "<pre>";print_r($updateData_lang);exit;	
 
-
-						//$updateData_lang['store_id'] = $this->session->userdata('storefront')->admin_id;
-
+						$getStore=$this->General_Model->get_admin_details_by_role(4,'ACTIVE');
+						foreach($getStore as $store)
+						{
 							$this->db->select('*');
 							$this->db->from('match_info_lang');
 							$this->db->where('match_id', $matchId);
-							$this->db->where('store_id', $this->session->userdata('storefront')->admin_id);
+							$this->db->where('store_id', $store->admin_id);
 							$this->db->where('language', $this->session->userdata('language_code'));
 							
-							$query = $this->db->get();
-						// echo $this->db->last_query();exit;
-							if ($query->num_rows() == 0) {							
+							$query = $this->db->get();							
+							if ($query->num_rows() == 0) {					
 								$updateData_lang['match_id'] = $matchId;
 								$updateData_lang['language'] = $this->session->userdata('language_code');						
-								$updateData_lang['store_id'] = $this->session->userdata('storefront')->admin_id;	
-											
+								$updateData_lang['store_id'] = $store->admin_id;												
 								$this->db->insert('match_info_lang', $updateData_lang);
 							
-							} else {
+							} else if($store->admin_id==$this->session->userdata('storefront')->admin_id) {
+								
+								$updateData_lang['store_id'] = $store->admin_id;
 								$this->General_Model->update('match_info_lang', array('match_id' => $matchId, 'language' => $this->session->userdata('language_code'),'store_id'=>$this->session->userdata('storefront')->admin_id), $updateData_lang);
 
 							}
+						}
 
 						
 						if (@$this->input->post('event_type') == "other") {
