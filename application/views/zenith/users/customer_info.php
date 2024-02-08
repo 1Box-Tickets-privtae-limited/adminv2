@@ -491,11 +491,8 @@ $this->load->view(THEME.'/common/header'); ?>
                                                                <a href="javascript:void(0)" class="btn-icon btn-icon-sm btn-icon-soft-primary" data-toggle="dropdown">
                                                                   <i class="mdi mdi-dots-vertical fs-sm"></i>
                                                                </a>
-                                                               <div class="dropdown-menu dropdown-menu-right">
-                                                                  <a href="#" class="dropdown-item">View</a>
-                                                                  <a href="#" class="dropdown-item">Download </a>
-                                                                  <a href="#" class="dropdown-item">Upload </a>
-                                                                  <a href="#" class="dropdown-item">Replace </a>
+                                                               <div class="dropdown-menu dropdown-menu-right">                                
+                                                                  <?php echo '<a href="'.base_url()."game/orders/details/". md5($data->booking_no).'" class="dropdown-item">View</a>'; ?>                           
                                                                </div>
                                                             </div>
                                                          </td>
@@ -506,8 +503,8 @@ $this->load->view(THEME.'/common/header'); ?>
                                                 </table>
                                              </div>
                                              <?php if ($customer_data_count>0) { ?>
-                                                <div class="pt-3 float-right">
-                                                   <a href="#" class="ms-1 waves-effect waves-light" data-effect="wave" type="submit">View All</a>
+                                                <div class="pt-3 float-right">   
+                                                   <?php echo '<a href="'.base_url()."game/orders/list_order/all".'" class="ms-1 waves-effect waves-light" data-effect="wave" >View All</a>'; ?>    
                                                 </div>
                                              <?php } ?>
                                           </div>
@@ -548,12 +545,37 @@ $this->load->view(THEME.'/common/header'); ?>
                                     
                                      ?></td>
                                     <td><?php echo date("d F Y",strtotime($data->match_date)).'<br/>'.date("H:i",strtotime($data->match_time)); ?></td>
-                                    <td>  <?php if($data->booking_status == '1'){?>Confirmed<?php } ?>
-                                       <?php if($data->booking_status == '2'){?>Pending<?php } ?>
-                                       <?php if($data->booking_status == '3'){?>Cancelled<?php } ?>
-                                       <?php if($data->booking_status == '4'){?>Shipped<?php } ?>
-                                       <?php if($data->booking_status == '5'){?>Delivered<?php } ?>
-                                       <?php if($data->booking_status == '6'){?>Downloaded<?php } ?> </td>
+                                     <td>
+                                          <?php
+                                          switch ($data->booking_status) {
+                                             case '0':
+                                                   echo 'Failed';
+                                                   break;
+                                             case '1':
+                                                   echo 'Confirmed';
+                                                   break;
+                                             case '2':
+                                                   echo 'Pending';
+                                                   break;
+                                             case '3':
+                                                   echo 'Cancelled';
+                                                   break;
+                                             case '4':
+                                                   echo 'Shipped';
+                                                   break;
+                                             case '5':
+                                                   echo 'Delivered';
+                                                   break;
+                                             case '6':
+                                                   echo 'Downloaded';
+                                                   break;
+                                             default:
+                                                   // Handle other cases if needed
+                                                   break;
+                                          }
+                                          ?>
+                                       </td>
+
                                  </tr>
                                  <?php } ?>
                               </tbody>
@@ -561,7 +583,8 @@ $this->load->view(THEME.'/common/header'); ?>
                         </div>
                                        <?php if ($notify_orders_seller>0  && !empty($notify_orders_seller)) { ?>
                                     <div class="pt-3 float-right text-right">
-                                       <a href="#" class="ms-1 waves-effect waves-light" data-effect="wave" type="submit">View All</a>
+                                       <!-- <a href="#" class="ms-1 waves-effect waves-light" data-effect="wave" type="submit">View All</a> -->
+                                       <?php echo '<a href="'.base_url()."game/orders/list_order/all".'"  class="ms-1 waves-effect waves-light">View All</a>'; ?>  
                                     </div>    
                                     <?php } ?>
                   </div>
@@ -645,6 +668,11 @@ $this->load->view(THEME.'/common/header'); ?>
                      </div>
                   </div>
 
+                  <?php 
+                    
+                    $cur_type = "£";
+                    ?>
+
                   <div class="card rounded-0">
                      <div class="card-body">
                         <div class="media align-items-center">
@@ -653,21 +681,21 @@ $this->load->view(THEME.'/common/header'); ?>
                               <h4 class="mb-2 font-weight-bold"><?php echo $customer_data_count; ?></h4>
                            </div>
                            <div class="text-center currency_symb pound">
-                              <span class="pound font-weight-normal">£</span>
+                              <span class="pound font-weight-normal"><?php echo $cur_type; ?></span>
                            </div>
                         </div>
                      </div>
-                  </div>
+                  </div>                 
 
                   <div class="card rounded-0">
                      <div class="card-body">
                         <div class="media align-items-center">
                            <div class="media-body currency_status">
                               <p class="mb-4 font-weight-normal color_main">Orders Value</p>
-                              <h4 class="mb-2 font-weight-bold">£ </h4>
+                              <h4 class="mb-2 font-weight-bold"><?php echo $total_order_count; ?> </h4>
                            </div>
                            <div class="text-center currency_symb pound">
-                              <span class="pound font-weight-normal">£</span>
+                              <span class="pound font-weight-normal"><?php echo $cur_type; ?></span>
                            </div>
                         </div>
                      </div>
@@ -680,77 +708,11 @@ $this->load->view(THEME.'/common/header'); ?>
                               <h4 class="mb-2 font-weight-bold"><?php echo $fulfilment_data->fulfilment; ?></h4>
                            </div>
                            <div class="text-center currency_symb pound">
-                              <span class="pound font-weight-normal">£</span>
+                              <span class="pound font-weight-normal"><?php echo $cur_type; ?></span>
                            </div>
                         </div>
                      </div>
                   </div>
-
-                  <!-- <div class="card rounded-0">
-                     <div class="card-body">
-                        <h5 class="mb-4 font-weight-600">Private Notes</h5>
-                        <div class="private_note">
-                           <div class="para">
-                           <i class="fas fa-info-circle"></i> 
-                           <p class="gr_clr font-weight-600">This note will be displayed to all employees but not to customers.</p>
-                           </div>
-                           <ul class="list-unstyled activity-widget mb-0">
-                              <li class="activity-list private_notes mb-3">
-                                 <div class="media pb-0">
-                                    <div class="parag_text">
-                                       <p class="mb-0 blk_clr">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                    </div>
-                                    <div class="media-body">
-                                      <div class="dropdown">
-                                          <a href="javascript:void(0)" class="btn-icon btn-icon-sm btn-icon-soft-primary" data-toggle="dropdown" aria-expanded="true">
-                                             <i class="mdi mdi-dots-vertical fs-sm"></i>
-                                          </a>
-                                          <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-135px, 32px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                             <a href="#" class="dropdown-item">View</a>
-                                             <a href="#" class="dropdown-item">Edit</a>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="order_val mt-2">
-                                    <div class="order_ids"><p class="mb-0">#12565A</p></div>
-                                    <div class="order_date_time">12 June 2019 13.45</div>
-                                 </div>
-                              </li>
-
-                              <li class="activity-list private_notes mb-3">
-                                 <div class="media pb-0">
-                                    <div class="parag_text">
-                                       <p class="mb-0 blk_clr">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                    </div>
-                                    <div class="media-body">
-                                      <div class="dropdown">
-                                          <a href="javascript:void(0)" class="btn-icon btn-icon-sm btn-icon-soft-primary" data-toggle="dropdown" aria-expanded="true">
-                                             <i class="mdi mdi-dots-vertical fs-sm"></i>
-                                          </a>
-                                          <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-135px, 32px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                             <a href="#" class="dropdown-item">View</a>
-                                             <a href="#" class="dropdown-item">Edit</a>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="order_val mt-2">
-                                    <div class="order_ids"><p class="mb-0">#12565A</p></div>
-                                    <div class="order_date_time">12 June 2019 13.45</div>
-                                 </div>
-                              </li>
-                           </ul>
-
-                           <div class="add_private_btn mt-5 float-right">
-                              <button type="button" class="btn btn_currency btn-primary waves-effect waves-light rounded-0" data-effect="wave">Add</button>
-                           </div>
-                        </div>
-                     </div>
-                  </div> -->
-
 
                   <div class="card rounded-0">
                      <div class="card-body">

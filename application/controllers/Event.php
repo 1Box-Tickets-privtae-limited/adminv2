@@ -860,32 +860,25 @@ class Event extends CI_Controller
 						$updateData_lang['description'] = trim($this->input->post('description'));
 						$updateData_lang['long_description'] = trim($this->input->post('long_description'));
 						$updateData_lang['seo_keywords'] = trim($this->input->post('seo_keywords'));
-						//$updateData_lang['short_description'] = trim($this->input->post('short_description'));
-						//echo "<pre>";print_r($updateData_lang);exit;	
 
-
-						//$updateData_lang['store_id'] = $this->session->userdata('storefront')->admin_id;
-
+						
 							$this->db->select('*');
 							$this->db->from('match_info_lang');
 							$this->db->where('match_id', $matchId);
 							$this->db->where('store_id', $this->session->userdata('storefront')->admin_id);
 							$this->db->where('language', $this->session->userdata('language_code'));
 							
-							$query = $this->db->get();
-						// echo $this->db->last_query();exit;
-							if ($query->num_rows() == 0) {							
+							$query = $this->db->get();							
+							if ($query->num_rows() == 0) {					
 								$updateData_lang['match_id'] = $matchId;
 								$updateData_lang['language'] = $this->session->userdata('language_code');						
-								$updateData_lang['store_id'] = $this->session->userdata('storefront')->admin_id;	
-											
+								$updateData_lang['store_id'] = $this->session->userdata('storefront')->admin_id;												
 								$this->db->insert('match_info_lang', $updateData_lang);
 							
-							} else {
+							} else  {
 								$this->General_Model->update('match_info_lang', array('match_id' => $matchId, 'language' => $this->session->userdata('language_code'),'store_id'=>$this->session->userdata('storefront')->admin_id), $updateData_lang);
 
 							}
-
 						
 						if (@$this->input->post('event_type') == "other") {
 							$event_url = base_url() . 'event/other_events/add_event/' . base64_encode(json_encode($matchId)) . '?tab=content';
@@ -2164,6 +2157,9 @@ class Event extends CI_Controller
 							$this->db->insert('banned_countries_match', $this->data);
 						}
 
+						$getStore=$this->General_Model->get_admin_details_by_role(4,'ACTIVE');
+						foreach($getStore as $store)
+						{
 						$lang = $this->General_Model->getAllItemTable('language', 'store_id', $this->session->userdata('storefront')->admin_id)->result();
 						foreach ($lang as $key => $l_code) {
 							$insertData_lang = array();
@@ -2173,9 +2169,10 @@ class Event extends CI_Controller
 							$insertData_lang['meta_title'] = $this->input->post('metatitle');
 							$insertData_lang['meta_description'] = $this->input->post('metadescription');
 							$insertData_lang['event_image'] = $insertData['event_image'];
-							$insertData_lang['store_id'] = $this->session->userdata('storefront')->admin_id;
+							$insertData_lang['store_id'] = $store->admin_id;
 							$this->General_Model->insert_data('match_info_lang', $insertData_lang);
 						}
+					}
 						$encode_id = base64_encode(json_encode("$match_id"));
 
 
@@ -2367,7 +2364,7 @@ class Event extends CI_Controller
 
 
 							$updateData_lang['match_name'] = trim($this->input->post('eventname'));
-							$this->General_Model->update('match_info_lang', array('match_id' => $matchId, 'language' => $this->session->userdata('language_code')), $updateData_lang);
+							$this->General_Model->update('match_info_lang', array('match_id' => $matchId, 'language' => $this->session->userdata('language_code'),'store_id'=>$this->session->userdata('storefront')->admin_id), $updateData_lang);
 
 							$this->db->delete('banned_countries_match', array('match_id' => $matchId));
 							$bancountry_ids = $this->input->post('bcountry');

@@ -31,8 +31,8 @@ class Home extends CI_Controller
 	{
 		$insert_data = array('private_note' => $_POST['notes'],'booking_id' => $_POST['order_id'],'seller_id' => $_POST['seller_id'],'user_id' => $_POST['user_id'],
 		'created_date' =>date('Y-m-d h:i:s'));
-		
-		if ($this->General_Model->insert_data('seller_private_notes', $insert_data)) {
+		$private_notes=$this->General_Model->insert_data('seller_private_notes', $insert_data);
+		if ($private_notes) {
 			$response = array('msg' => 'Private Notes Added Successfully.','status' => 1,);
 		} else {
 			$response = array('msg' => 'Failed to create Private Notes ', 'status' => 0);
@@ -1783,6 +1783,15 @@ return TRUE;
 		//print_r($this->data['pending_payout'] );
 		
 		$this->data['customer_data_orders'] =$this->General_Model->getOrders('','',$segment,'','','user_id')->result();
+
+		$order_value=0;
+		foreach($this->data['customer_data_orders'] as $total_order_count)
+		{
+			 $order_value+=number_format($total_order_count->total_base_amount,2);
+			
+		}
+
+		$this->data['total_order_count']=$order_value;
 	
 		$this->data['customer_data_count'] =$this->General_Model->getOrders('','',$segment,'','','user_id')->num_rows();
 
@@ -1806,18 +1815,7 @@ return TRUE;
 		}
 		
 		$this->data['fulfilment_data'] = $this->General_Model->get_fulfilment($segment);
-
-		// echo '<pre/>';
-		// print_r($this->data['customer_data']);
-		// exit;
-
-
 		$this->data['countries'] = $this->General_Model->getAllItemTable('countries')->result();
-		// echo '<pre/>';
-		// print_r($this->data['customer_data']);
-		// echo $segment;
-		// exit;
-
 		$this->load->view(THEME.'users/customer_info',$this->data);
 	}
 	public function master()
