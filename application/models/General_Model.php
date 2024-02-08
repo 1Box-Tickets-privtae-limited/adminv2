@@ -6203,7 +6203,7 @@ public function getOrderData_v2()
 			$this->db->select('COUNT(booking_etickets.ticket_status) as fulfilment');
 			$this->db->from('booking_global');
 			$this->db->join('booking_etickets', 'booking_global.bg_id = booking_etickets.booking_id', 'left');
-			$this->db->where('booking_global.seller_id', $seller_id);
+			$this->db->where('booking_global.user_id', $seller_id);
 			$this->db->where('booking_etickets.ticket_status !=', 2);
 
 			$query = $this->db->get();

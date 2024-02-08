@@ -491,11 +491,8 @@ $this->load->view(THEME.'/common/header'); ?>
                                                                <a href="javascript:void(0)" class="btn-icon btn-icon-sm btn-icon-soft-primary" data-toggle="dropdown">
                                                                   <i class="mdi mdi-dots-vertical fs-sm"></i>
                                                                </a>
-                                                               <div class="dropdown-menu dropdown-menu-right">
-                                                                  <a href="#" class="dropdown-item">View</a>
-                                                                  <a href="#" class="dropdown-item">Download </a>
-                                                                  <a href="#" class="dropdown-item">Upload </a>
-                                                                  <a href="#" class="dropdown-item">Replace </a>
+                                                               <div class="dropdown-menu dropdown-menu-right">                                
+                                                                  <?php echo '<a href="'.base_url()."game/orders/details/". md5($data->booking_no).'" class="dropdown-item">View</a>'; ?>                           
                                                                </div>
                                                             </div>
                                                          </td>
@@ -506,8 +503,8 @@ $this->load->view(THEME.'/common/header'); ?>
                                                 </table>
                                              </div>
                                              <?php if ($customer_data_count>0) { ?>
-                                                <div class="pt-3 float-right">
-                                                   <a href="#" class="ms-1 waves-effect waves-light" data-effect="wave" type="submit">View All</a>
+                                                <div class="pt-3 float-right">   
+                                                   <?php echo '<a href="'.base_url()."game/orders/list_order/all".'" class="ms-1 waves-effect waves-light" data-effect="wave" >View All</a>'; ?>    
                                                 </div>
                                              <?php } ?>
                                           </div>
@@ -548,12 +545,37 @@ $this->load->view(THEME.'/common/header'); ?>
                                     
                                      ?></td>
                                     <td><?php echo date("d F Y",strtotime($data->match_date)).'<br/>'.date("H:i",strtotime($data->match_time)); ?></td>
-                                    <td>  <?php if($data->booking_status == '1'){?>Confirmed<?php } ?>
-                                       <?php if($data->booking_status == '2'){?>Pending<?php } ?>
-                                       <?php if($data->booking_status == '3'){?>Cancelled<?php } ?>
-                                       <?php if($data->booking_status == '4'){?>Shipped<?php } ?>
-                                       <?php if($data->booking_status == '5'){?>Delivered<?php } ?>
-                                       <?php if($data->booking_status == '6'){?>Downloaded<?php } ?> </td>
+                                     <td>
+                                          <?php
+                                          switch ($data->booking_status) {
+                                             case '0':
+                                                   echo 'Failed';
+                                                   break;
+                                             case '1':
+                                                   echo 'Confirmed';
+                                                   break;
+                                             case '2':
+                                                   echo 'Pending';
+                                                   break;
+                                             case '3':
+                                                   echo 'Cancelled';
+                                                   break;
+                                             case '4':
+                                                   echo 'Shipped';
+                                                   break;
+                                             case '5':
+                                                   echo 'Delivered';
+                                                   break;
+                                             case '6':
+                                                   echo 'Downloaded';
+                                                   break;
+                                             default:
+                                                   // Handle other cases if needed
+                                                   break;
+                                          }
+                                          ?>
+                                       </td>
+
                                  </tr>
                                  <?php } ?>
                               </tbody>
@@ -561,7 +583,8 @@ $this->load->view(THEME.'/common/header'); ?>
                         </div>
                                        <?php if ($notify_orders_seller>0  && !empty($notify_orders_seller)) { ?>
                                     <div class="pt-3 float-right text-right">
-                                       <a href="#" class="ms-1 waves-effect waves-light" data-effect="wave" type="submit">View All</a>
+                                       <!-- <a href="#" class="ms-1 waves-effect waves-light" data-effect="wave" type="submit">View All</a> -->
+                                       <?php echo '<a href="'.base_url()."game/orders/list_order/all".'"  class="ms-1 waves-effect waves-light">View All</a>'; ?>  
                                     </div>    
                                     <?php } ?>
                   </div>
@@ -645,6 +668,20 @@ $this->load->view(THEME.'/common/header'); ?>
                      </div>
                   </div>
 
+                  <?php 
+                     switch ($data->currency_type) {
+                        case "USD":
+                            $cur_type = "$";
+                            break;
+                        case "GBP":
+                            $cur_type = "£";
+                            break;
+                        case "EUR":
+                            $cur_type = "€";
+                            break;
+                    }
+                    ?>
+
                   <div class="card rounded-0">
                      <div class="card-body">
                         <div class="media align-items-center">
@@ -653,21 +690,21 @@ $this->load->view(THEME.'/common/header'); ?>
                               <h4 class="mb-2 font-weight-bold"><?php echo $customer_data_count; ?></h4>
                            </div>
                            <div class="text-center currency_symb pound">
-                              <span class="pound font-weight-normal">£</span>
+                              <span class="pound font-weight-normal"><?php echo $cur_type; ?></span>
                            </div>
                         </div>
                      </div>
-                  </div>
+                  </div>                 
 
                   <div class="card rounded-0">
                      <div class="card-body">
                         <div class="media align-items-center">
                            <div class="media-body currency_status">
                               <p class="mb-4 font-weight-normal color_main">Orders Value</p>
-                              <h4 class="mb-2 font-weight-bold">£ </h4>
+                              <h4 class="mb-2 font-weight-bold"><?php echo $total_order_count; ?> </h4>
                            </div>
                            <div class="text-center currency_symb pound">
-                              <span class="pound font-weight-normal">£</span>
+                              <span class="pound font-weight-normal"><?php echo $cur_type; ?></span>
                            </div>
                         </div>
                      </div>
@@ -680,7 +717,7 @@ $this->load->view(THEME.'/common/header'); ?>
                               <h4 class="mb-2 font-weight-bold"><?php echo $fulfilment_data->fulfilment; ?></h4>
                            </div>
                            <div class="text-center currency_symb pound">
-                              <span class="pound font-weight-normal">£</span>
+                              <span class="pound font-weight-normal"><?php echo $cur_type; ?></span>
                            </div>
                         </div>
                      </div>
