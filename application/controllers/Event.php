@@ -2364,7 +2364,7 @@ class Event extends CI_Controller
 
 
 							$updateData_lang['match_name'] = trim($this->input->post('eventname'));
-							$this->General_Model->update('match_info_lang', array('match_id' => $matchId, 'language' => $this->session->userdata('language_code')), $updateData_lang);
+							$this->General_Model->update('match_info_lang', array('match_id' => $matchId, 'language' => $this->session->userdata('language_code'),'store_id'=>$this->session->userdata('storefront')->admin_id), $updateData_lang);
 
 							$this->db->delete('banned_countries_match', array('match_id' => $matchId));
 							$bancountry_ids = $this->input->post('bcountry');
