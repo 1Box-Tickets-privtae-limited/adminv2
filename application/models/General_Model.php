@@ -5059,6 +5059,9 @@ public function getOrderData_v2()
 		
 			$this->db->where($sel_user, $seller_id);
 		}
+		// if ($userid != "") {
+		// 	$this->db->where('booking_global.user_id', $userid);
+		// }
 		if($flag == 'api'){ 
 			$this->db->group_start();
 			$this->db->where('booking_global.partner_id is NOT NULL', NULL, FALSE);
@@ -5087,9 +5090,9 @@ public function getOrderData_v2()
 		if ($match_id != "") {
 			$this->db->where('booking_tickets.match_id', $match_id);
 		}
-		if ($seller_id != "") {
-			$this->db->where('booking_global.seller_id', $seller_id);
-		}
+		// if ($seller_id != "") {
+		// 	$this->db->where('booking_global.seller_id', $seller_id);
+		// }
 		
 	//	$this->db->order_by('booking_global.bg_id', 'DESC');		
 		//$this->db->order_by('booking_tickets.match_date', 'ASC');
@@ -5137,7 +5140,7 @@ public function getOrderData_v2()
 		}
 		$this->db->order_by("match_date_new ASC ,booking_tickets.match_date ASC");
 		$qry = $this->db->get();
-		//echo $this->db->last_query();exit;
+	//	echo $this->db->last_query();exit;
 		return $qry;
 		/*if ($qry->num_rows() > 0) {
 			return $qry->result();

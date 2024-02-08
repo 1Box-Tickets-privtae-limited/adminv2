@@ -474,7 +474,7 @@ $this->load->view(THEME.'/common/header'); ?>
                                                                            £
                                                                            <?php } else if($data->currency_type == "EUR"){ ?>
                                                                            €
-                                                                           <?php } ?> <?php echo number_format($data->ticket_amount,2);?></td>
+                                                                           <?php } ?> <?php echo number_format($data->total_amount,2);?></td>
                                                          <td>
                                                             <div class="bttns">
                                                               <!-- <span class="badge badge-success">Completed</span> -->
