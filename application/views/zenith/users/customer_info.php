@@ -669,17 +669,8 @@ $this->load->view(THEME.'/common/header'); ?>
                   </div>
 
                   <?php 
-                     switch ($data->currency_type) {
-                        case "USD":
-                            $cur_type = "$";
-                            break;
-                        case "GBP":
-                            $cur_type = "£";
-                            break;
-                        case "EUR":
-                            $cur_type = "€";
-                            break;
-                    }
+                    
+                    $cur_type = "£";
                     ?>
 
                   <div class="card rounded-0">
@@ -722,72 +713,6 @@ $this->load->view(THEME.'/common/header'); ?>
                         </div>
                      </div>
                   </div>
-
-                  <!-- <div class="card rounded-0">
-                     <div class="card-body">
-                        <h5 class="mb-4 font-weight-600">Private Notes</h5>
-                        <div class="private_note">
-                           <div class="para">
-                           <i class="fas fa-info-circle"></i> 
-                           <p class="gr_clr font-weight-600">This note will be displayed to all employees but not to customers.</p>
-                           </div>
-                           <ul class="list-unstyled activity-widget mb-0">
-                              <li class="activity-list private_notes mb-3">
-                                 <div class="media pb-0">
-                                    <div class="parag_text">
-                                       <p class="mb-0 blk_clr">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                    </div>
-                                    <div class="media-body">
-                                      <div class="dropdown">
-                                          <a href="javascript:void(0)" class="btn-icon btn-icon-sm btn-icon-soft-primary" data-toggle="dropdown" aria-expanded="true">
-                                             <i class="mdi mdi-dots-vertical fs-sm"></i>
-                                          </a>
-                                          <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-135px, 32px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                             <a href="#" class="dropdown-item">View</a>
-                                             <a href="#" class="dropdown-item">Edit</a>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="order_val mt-2">
-                                    <div class="order_ids"><p class="mb-0">#12565A</p></div>
-                                    <div class="order_date_time">12 June 2019 13.45</div>
-                                 </div>
-                              </li>
-
-                              <li class="activity-list private_notes mb-3">
-                                 <div class="media pb-0">
-                                    <div class="parag_text">
-                                       <p class="mb-0 blk_clr">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                    </div>
-                                    <div class="media-body">
-                                      <div class="dropdown">
-                                          <a href="javascript:void(0)" class="btn-icon btn-icon-sm btn-icon-soft-primary" data-toggle="dropdown" aria-expanded="true">
-                                             <i class="mdi mdi-dots-vertical fs-sm"></i>
-                                          </a>
-                                          <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-135px, 32px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                             <a href="#" class="dropdown-item">View</a>
-                                             <a href="#" class="dropdown-item">Edit</a>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-
-                                 <div class="order_val mt-2">
-                                    <div class="order_ids"><p class="mb-0">#12565A</p></div>
-                                    <div class="order_date_time">12 June 2019 13.45</div>
-                                 </div>
-                              </li>
-                           </ul>
-
-                           <div class="add_private_btn mt-5 float-right">
-                              <button type="button" class="btn btn_currency btn-primary waves-effect waves-light rounded-0" data-effect="wave">Add</button>
-                           </div>
-                        </div>
-                     </div>
-                  </div> -->
-
 
                   <div class="card rounded-0">
                      <div class="card-body">
