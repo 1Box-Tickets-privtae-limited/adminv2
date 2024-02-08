@@ -1787,7 +1787,7 @@ return TRUE;
 		$order_value=0;
 		foreach($this->data['customer_data_orders'] as $total_order_count)
 		{
-			 $order_value+=number_format($total_order_count->total_amount,2);
+			 $order_value+=number_format($total_order_count->total_base_amount,2);
 			
 		}
 
@@ -1815,18 +1815,7 @@ return TRUE;
 		}
 		
 		$this->data['fulfilment_data'] = $this->General_Model->get_fulfilment($segment);
-
-		// echo '<pre/>';
-		// print_r($this->data['fulfilment_data']);
-		// exit;
-
-
 		$this->data['countries'] = $this->General_Model->getAllItemTable('countries')->result();
-		// echo '<pre/>';
-		// print_r($this->data['customer_data']);
-		// echo $segment;
-		// exit;
-
 		$this->load->view(THEME.'users/customer_info',$this->data);
 	}
 	public function master()
