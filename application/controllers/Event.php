@@ -1960,6 +1960,9 @@ class Event extends CI_Controller
 
 				// echo "MATCHID:".$match_id;exit;
 				$this->data['event'] = $this->General_Model->getOtherEvents('', '', $row_no = '', $row_per_page = '', $orderColumn = '', $orderby = '', array('match_info.m_id' => $match_id))->row();
+				if(empty($this->data['event'])){
+					$this->data['event'] = $this->General_Model->getOtherEvents('', '', $row_no = '', $row_per_page = '', $orderColumn = '', $orderby = '', array('match_info.m_id' => $match_id),'',13)->row();
+				}
 
 
 				$this->data['matches'] = $this->General_Model->get_matches($match_id)->row();
