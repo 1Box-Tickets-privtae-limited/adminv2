@@ -710,7 +710,7 @@ z-index: 9999;
                                              <!-- <input type="text" id="simpleinput" class="form-control" placeholder="Enter Tournament Name" <?php //echo $event->match_name;?> value="<?php echo $event->match_name;?>"> -->
                                              <!-- disabled -->
                                              <input  type="text" id="matchname" name="matchname" class="form-control" placeholder="Enter Match Title" value="<?php
-                                                echo isset($event->match_name) ? $event->match_name : '';?>">
+                                                echo isset($event->match_name) ? $event->match_name : '';?>" readonly>
                                              <input  type="hidden" id="" name="" class="input" placeholder="Enter Match Title" required value="<?php echo $event->match_name;?>">
                                           </div>
                                        </div>
