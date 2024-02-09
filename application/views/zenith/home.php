@@ -160,6 +160,9 @@
                                                          if (strtoupper($getMySalesDa->currency_type) == "EUR") { 
                                                                $cur_type='€ ';
                                                          } 
+                                                         if (strtoupper($getMySalesDa->currency_type) != "GBP" && strtoupper($getMySalesDa->currency_type) != "EUR") {
+                                                            $cur_type= strtoupper($getMySalesDa->currency_type);
+                                                         }												
                                                             $ticket_amnt= number_format($getMySalesDa->ticket_amount,2) ; 
                                                       } 
                                                       if ($this->session->userdata('role') != 1) { 
@@ -169,6 +172,9 @@
                                                          if (strtoupper($getMySalesDa->currency_type) == "EUR") { 
                                                             $cur_type='€ ';
                                                          } 
+                                                         if (strtoupper($getMySalesDa->currency_type) != "GBP" && strtoupper($getMySalesDa->currency_type) != "EUR") {
+                                                            $cur_type= strtoupper($getMySalesDa->currency_type);
+                                                         }
                                                          
                                                          $ticket_amnt= number_format($getMySalesDa->total_amount,2) ;
                                                       } ?>
