@@ -3478,7 +3478,7 @@ public function getOrderData_v2()
 	}
 
 
-	function getOtherEvents($event_id = '', $event_held = '', $row_no = '', $row_per_page = '', $orderColumn = '', $orderby = '', $where_array = array(), $search = '')
+	function getOtherEvents($event_id = '', $event_held = '', $row_no = '', $row_per_page = '', $orderColumn = '', $orderby = '', $where_array = array(), $search = '',$store_id='')
 	{
 		$this->db->select('match_settings.*,match_info.*,match_info.status as match_status,otherevent_category.*,match_info_lang.match_name,match_info_lang.description,match_info_lang.meta_title,match_info_lang.meta_description,tournament_lang.tournament_name,stadium.stadium_name, c.name as city_name, cn.name as country_name,(SUM(s1.quantity 
 			 )  + SUM(s1.sold) ) as box_quantity,s1.sold ,match_info.slug as slug')->from('match_info')
@@ -3496,6 +3496,13 @@ public function getOrderData_v2()
 		
 		$this->db->where('match_info.event_type', 'other');
 		$this->db->where('match_info_lang.language', $this->session->userdata('language_code'));
+		if($store_id != ""){
+			$this->db->where('match_info_lang.store_id', 13);
+		}
+		else{
+			$this->db->where('match_info_lang.store_id', $this->session->userdata('storefront')->admin_id);
+		}
+		
 		if ($event_held == 'upcoming') {
 			if(isset($search['event_start_date']) && isset($search['event_end_date'])){
 				$this->db->where('DATE(match_info.match_date) >=', date('Y-m-d', strtotime($search['event_start_date'])));
