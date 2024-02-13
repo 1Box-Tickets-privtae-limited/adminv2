@@ -178,7 +178,51 @@ class Event extends CI_Controller
 		return $this->data;
 	}
 
+public function ticket_logs($s_no)
+	{
 
+		if($s_no != ""){
+			$this->datas['s_no'] = $s_no;
+			$this->load->view(THEME.'tickets/ticket_logs', $this->datas);
+		}
+	}
+
+	public function get_ticket_log_list()
+	{
+		$search=[];
+		$row_per_page = 50;
+
+    $rowno = $_POST['start'];$where_array=[];$draw = $_POST['draw'];$data = [];  
+		
+		$query_inpt=$_POST['query'];
+		
+	$allcount = $this->General_Model->getAllItemTable('sell_tickets_history', 'ticket_no',$query_inpt)->num_rows();
+	
+		// Get records
+		$records = $this->General_Model->getAllItemTable('sell_tickets_history','ticket_no',$query_inpt, 'id', 'DESC')->result();
+
+	
+
+		foreach($records as $record ){
+			$ticket_msg = substr_replace($record->ticket_msg, "...", 100);
+			$data[] = array( 
+				"ticket_no"				=> 	$record->ticket_no,			
+				"log"					=> 	$ticket_msg,
+				"date"						=>	$record->created_date_time
+			);
+			
+	}
+		$result = array(
+            "draw" => $draw,
+              "recordsTotal" => $allcount,
+              "recordsFiltered" => $allcount,
+              "data" => $data
+         );
+
+		echo json_encode($result);
+		exit();
+
+	}
 	public function stadiums()
 	{
 
@@ -2169,6 +2213,7 @@ class Event extends CI_Controller
 							$insertData_lang['match_id'] = $match_id;
 							$insertData_lang['language'] = $l_code->language_code;
 							$insertData_lang['match_name'] = trim($this->input->post('eventname'));
+							$insertData_lang['extra_title'] = trim($this->input->post('extra_title'));
 							$insertData_lang['meta_title'] = $this->input->post('metatitle');
 							$insertData_lang['meta_description'] = $this->input->post('metadescription');
 							$insertData_lang['event_image'] = $insertData['event_image'];
@@ -2367,6 +2412,7 @@ class Event extends CI_Controller
 
 
 							$updateData_lang['match_name'] = trim($this->input->post('eventname'));
+							$updateData_lang['extra_title'] = trim($this->input->post('extra_title'));
 							$this->General_Model->update('match_info_lang', array('match_id' => $matchId, 'language' => $this->session->userdata('language_code'),'store_id'=>$this->session->userdata('storefront')->admin_id), $updateData_lang);
 
 							$this->db->delete('banned_countries_match', array('match_id' => $matchId));

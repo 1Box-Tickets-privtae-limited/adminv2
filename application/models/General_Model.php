@@ -3480,7 +3480,7 @@ public function getOrderData_v2()
 
 	function getOtherEvents($event_id = '', $event_held = '', $row_no = '', $row_per_page = '', $orderColumn = '', $orderby = '', $where_array = array(), $search = '',$store_id='')
 	{
-		$this->db->select('match_settings.*,match_info.*,match_info.status as match_status,otherevent_category.*,match_info_lang.match_name,match_info_lang.description,match_info_lang.meta_title,match_info_lang.meta_description,tournament_lang.tournament_name,stadium.stadium_name, c.name as city_name, cn.name as country_name,(SUM(s1.quantity 
+		$this->db->select('match_settings.*,match_info.*,match_info.status as match_status,otherevent_category.*,match_info_lang.match_name,match_info_lang.extra_title,match_info_lang.description,match_info_lang.meta_title,match_info_lang.meta_description,tournament_lang.tournament_name,stadium.stadium_name, c.name as city_name, cn.name as country_name,(SUM(s1.quantity 
 			 )  + SUM(s1.sold) ) as box_quantity,s1.sold ,match_info.slug as slug')->from('match_info')
 		->join('match_info_lang', 'match_info_lang.match_id = match_info.m_id', 'left')
 		->join('booking_global', 'match_info.m_id = booking_global.bg_id', 'left')

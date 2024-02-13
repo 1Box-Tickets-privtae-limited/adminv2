@@ -243,10 +243,15 @@ class Blog extends CI_Controller
 			$table2 = "blog_category";
 			$this->data['category'] = $this->Blog_Model->getAllItemTable($table2,$rowno,10000,'','')->result();
 			$this->data['blog_tags'] = $results = $this->Blog_Model->getBlogTagList("", "", "", "", '',"")->result();
+			$this->data['tournaments'] = $this->General_Model->get_selected_tournament(1)->result();
+			$this->data['teams'] = $this->General_Model->get_selected_teams(1)->result();
+
 			$this->load->view(THEME.'blog/add_blog', $this->data);
 		}
 		else if ($segment == 'edit') {
 			$this->data['countries'] = $this->General_Model->getAllItemTable('countries')->result();
+			$this->data['tournaments'] = $this->General_Model->get_selected_tournament(1)->result();
+			$this->data['teams'] = $this->General_Model->get_selected_teams(1)->result();
 			$segment4 = $this->uri->segment(4);
 			if ($segment4 != "") {
 				
@@ -268,6 +273,9 @@ class Blog extends CI_Controller
 				if(!empty($_POST['blog_tags']))
 					$_POST['blog_tags']=implode(",",$_POST['blog_tags']);
 
+					if(!empty($_POST['team']))
+						$_POST['team']=implode(",",$_POST['team']);
+
 					$id = $this->input->post('id');
 					if ($id == '') {
 
@@ -288,7 +296,6 @@ class Blog extends CI_Controller
 							$blogdate = $this->input->post('blogdate');
 
 							$blog_slug = $this->input->post('blog_slug');
-
 							 $insert_data = array(
 								'blog_category' 	=> $this->input->post('blog_category'),
 								'blog_type' 		=> $this->input->post('blog_type'),
@@ -301,6 +308,8 @@ class Blog extends CI_Controller
 								'meta_description'  => $this->input->post('meta_description'),
 								'blog_tag_id'  		=> $this->input->post('blog_tags'),
 								'seo_keywords' 		=> $this->input->post('seo_keywords'),
+								'tournament' 		=> $this->input->post('tournament'),
+								'team' 				=> $this->input->post('team'),
 								'created_at' 		=> date('Y-m-d h:i:s',strtotime($blogdate))
 								);
 
@@ -367,7 +376,7 @@ class Blog extends CI_Controller
 							// die;
 
 						
-							//print_r($insert_data);die;
+							// print_r($insert_data);die;
 							$inserted_id = $this->General_Model->insert_data($table, $insert_data);
 							//echo $this->db->last_query();
 							if ($inserted_id) {
@@ -414,6 +423,18 @@ class Blog extends CI_Controller
 							$updateData['blog_type'] = $this->input->post('blog_type');
 							$updateData['country'] = $this->input->post('country');
 							$updateData['blog_tag_id'] = $this->input->post('blog_tags');
+
+							if($updateData['blog_type']=="2" && $updateData['blog_category']=="7")
+							{
+								$updateData['tournament']=$this->input->post('tournament');
+								$updateData['team']= $this->input->post('team');
+							}
+							else
+							{
+								$updateData['tournament']=null;
+								$updateData['team']= null;
+							}
+							
 
 							//print_r($insert_data);
 							if (!empty($_FILES['blog_small']['name'])) {
