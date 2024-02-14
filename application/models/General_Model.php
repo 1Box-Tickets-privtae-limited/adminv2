@@ -1515,6 +1515,18 @@ public function check_oe_match_exists($tournament,$team_1,$team_2,$venue) {
 			$this->db->order_by('match_info.match_date', 'DESC');
 			$this->db->where_in('match_info.tbc_status', 1);
 		}
+		else if ($match_held == 'all') {
+			if (isset($search['event_start_date']) && isset($search['event_end_date'])) {
+				$this->db->where('DATE(match_info.match_date) >=', date('Y-m-d', strtotime($search['event_start_date'])));
+				$this->db->where('DATE(match_info.match_date) <=', date('Y-m-d', strtotime($search['event_end_date'])));
+
+			}
+			else {
+				$this->db->where('DATE(match_info.match_date) >=', "2023-07-01");
+			}
+			$this->db->order_by('match_info.match_date', 'ASC');
+			$this->db->where_in('match_info.status', array(1));
+		}
 		if ($match_held == 'trashed') {
 			$this->db->where('match_info.status', '2');
 			$this->db->where('match_info.status', '3');
