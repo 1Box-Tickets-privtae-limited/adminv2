@@ -2204,23 +2204,24 @@ public function ticket_logs($s_no)
 							$this->db->insert('banned_countries_match', $this->data);
 						}
 
-						$getStore=$this->General_Model->get_admin_details_by_role(4,'ACTIVE');
-						foreach($getStore as $store)
-						{
-						$lang = $this->General_Model->getAllItemTable('language', 'store_id', $this->session->userdata('storefront')->admin_id)->result();
-						foreach ($lang as $key => $l_code) {
-							$insertData_lang = array();
-							$insertData_lang['match_id'] = $match_id;
-							$insertData_lang['language'] = $l_code->language_code;
-							$insertData_lang['match_name'] = trim($this->input->post('eventname'));
-							$insertData_lang['extra_title'] = trim($this->input->post('extra_title'));
-							$insertData_lang['meta_title'] = $this->input->post('metatitle');
-							$insertData_lang['meta_description'] = $this->input->post('metadescription');
-							$insertData_lang['event_image'] = $insertData['event_image'];
-							$insertData_lang['store_id'] = $store->admin_id;
-							$this->General_Model->insert_data('match_info_lang', $insertData_lang);
+						$getStore = $this->General_Model->get_admin_details_by_site_setting();
+						foreach ($getStore as $store) {
+							if ($store->store_id != 238) {
+								$lang = $this->General_Model->getAllItemTable('language', 'store_id', $this->session->userdata('storefront')->admin_id)->result();
+								foreach ($lang as $key => $l_code) {
+									$insertData_lang = array();
+									$insertData_lang['match_id'] = $match_id;
+									$insertData_lang['language'] = $l_code->language_code;
+									$insertData_lang['match_name'] = trim($this->input->post('eventname'));
+									$insertData_lang['extra_title'] = trim($this->input->post('extra_title'));
+									$insertData_lang['meta_title'] = $this->input->post('metatitle');
+									$insertData_lang['meta_description'] = $this->input->post('metadescription');
+									$insertData_lang['event_image'] = $insertData['event_image'];
+									$insertData_lang['store_id'] = $store->store_id;
+									$this->General_Model->insert_data('match_info_lang', $insertData_lang);
+								}
+							}
 						}
-					}
 						$encode_id = base64_encode(json_encode("$match_id"));
 
 
@@ -2296,6 +2297,7 @@ public function ticket_logs($s_no)
 						$updateData = array();
 
 						if ($_POST['flag'] != "content") {
+
 							$updateData_lang = array();
 							if (!empty($_FILES['event_image']['name'])) {
 								$mdata = $this->General_Model->getAllItemTable_array('match_info', array('m_id' => $matchId))->row();
@@ -2409,11 +2411,17 @@ public function ticket_logs($s_no)
 								}
 							$this->General_Model->update('match_info', array('m_id' => $matchId), $updateData);
 
+							$getStore = $this->General_Model->get_admin_details_by_site_setting();
+							foreach ($getStore as $store) {
+								if ($store->store_id != 238) {
+									//$lang = $this->General_Model->getAllItemTable('language', 'store_id', $this->session->userdata('storefront')->admin_id)->result();
+								//	foreach ($lang as $key => $l_code) {
+										$updateData_lang['match_name'] = trim($this->input->post('eventname'));
+										$this->General_Model->update('match_info_lang', array('match_id' => $matchId, 'language' => $this->session->userdata('language_code'),'store_id'=>$store->store_id), $updateData_lang);
 
-
-							$updateData_lang['match_name'] = trim($this->input->post('eventname'));
-							$updateData_lang['extra_title'] = trim($this->input->post('extra_title'));
-							$this->General_Model->update('match_info_lang', array('match_id' => $matchId, 'language' => $this->session->userdata('language_code'),'store_id'=>$this->session->userdata('storefront')->admin_id), $updateData_lang);
+									//}
+								}
+							}
 
 							$this->db->delete('banned_countries_match', array('match_id' => $matchId));
 							$bancountry_ids = $this->input->post('bcountry');
