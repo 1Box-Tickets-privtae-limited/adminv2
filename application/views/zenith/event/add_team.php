@@ -123,7 +123,7 @@
                                           </div> 
                                        </div>  -->
                                        <?php }  ?>
-
+                            <?php if($segment!="artists") { ?>
                                        <div class="col-lg-4">
                                           <div class="form-group">
                                               <label for="stadium">Default Stadium</label>
@@ -140,6 +140,7 @@
                                               </select>
                                           </div> 
                                        </div>
+                                   
                                        <div class="col-lg-4">
                                           <div class="form-group">
                                               <label for="country">Country</label>
@@ -174,6 +175,8 @@
                                                         </select> 
                                           </div> 
                                        </div>
+                               <?php   } ?>
+                               
                                        <div class="col-lg-4">
                                           <div class="form-group">
                                            <label for="simpleinput"><?php echo ucfirst($segment); ?> Color <span class="text-danger">*</span></label>
