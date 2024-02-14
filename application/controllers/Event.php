@@ -31,14 +31,14 @@ class Event extends CI_Controller
 	public function event_reports(){
 
 		$where_array = array();
-		if($_GET['eventStartDate'] != "" && $_GET['eventEndDate'] != ""){
-			$where_array['event_start_date']  = $_GET['eventStartDate'];
-			$where_array['event_end_date']  = $_GET['eventEndDate'];
+		if($_GET['event_start_date'] != "" && $_GET['event_end_date'] != ""){
+			$where_array['event_start_date']  = $_GET['event_start_date'];
+			$where_array['event_end_date']  = $_GET['event_end_date'];
 
 			$fileName = "Event_summary_" .$_GET['eventStartDate'] . "_To_".$_GET['eventEndDate'].".xls"; 
 		}
 		else{
-			 $fileName = "Event_summary_" . date('Y-m-d') . ".xls"; 
+			 $fileName = "Event_summary_" . date('Y-m-d H:i:s') . ".xls"; 
 		}
 		if($_GET['event_name'] != ""){
 			$where_array['event_name'] = $_GET['event_name'];
@@ -53,16 +53,35 @@ class Event extends CI_Controller
 		if($_GET['statuss'] != ""){
 			$where_array['status'] =  explode(",",$_GET['status']);
 		}
-		
-		$all_records = $this->General_Model->get_matches('','upcoming','','','','','',$where_array,'')->result();
+
+		if($_GET['status'] != ""){
+			$status = explode(",",$_GET['status']);
+			$match_held = 'all';
+			$ii = 1;
+			if(in_array(1, $status)){
+				$match_held = "upcoming";
+				$ii++;
+			}
+			else if(in_array(2, $status)){
+				$match_held = "expired";
+				$ii++;
+			}
+			if($ii == 2){
+				$match_held = 'all';
+			}
+		}
+		 
+
+			// pr($_GET);die;
+		$all_records = $this->General_Model->get_matches('',$match_held,'','','','','',$where_array,'')->result();
 	
-		$fields = array('EventName','Venue','Tournament','EventDate','NumberOfTicketsListed','NumberOfAPITickets','TicketsSold'); 
+		$fields = array('EventName','Venue','Tournament','EventDate','NumberOfTicketsListed','NumberOfAPITickets','TicketsSold','Url'); 
 		
 		// Display column names as first row 
 		$excelData = implode("\t", array_values($fields)) . "\n"; 
 		$total_amount = array();
 		foreach($all_records as $download_order){  
-		$lineData = array($download_order->match_name,$download_order->stadium_name,$download_order->tournament_name,date("d F Y",strtotime($download_order->match_date)),$download_order->matchticket,$download_order->tournament_name,$download_order->sold); 
+		$lineData = array($download_order->match_name,$download_order->stadium_name,$download_order->tournament_name,date("d-m-Y H:i:s",strtotime($download_order->match_date)),$download_order->matchticket,'',$download_order->sold,"https://www.1boxoffice.com/en/".$download_order->slug); 
 		
 		$total_amount[] = $download_order->total_base_amount;
 		$excelData .= implode("\t", array_values($lineData)) . "\n"; 
