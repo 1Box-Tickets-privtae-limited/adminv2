@@ -55,7 +55,7 @@
                            <div class="col-lg-6">
                                   <div class="form-group">
                                    <label for="seat_position">Blog Type<span class="text-danger">*</span></label>
-                                   <select class="custom-select" name="blog_type" required>
+                                   <select class="custom-select" name="blog_type" required id="blog_type">
                                     <option value="">Select Type</option>
                                     <option value="1" <?= ($result->blog_type == '1') ? 'selected' : '' ?>>Blogs</option>
                                     <option value="3" <?= ($result->blog_type == '3') ? 'selected' : '' ?>>Articles</option>
@@ -67,7 +67,7 @@
                             <div class="col-lg-6">
                                   <div class="form-group">
                                    <label for="seat_position">Blog Category<span class="text-danger">*</span></label>
-                                   <select class="custom-select" name="blog_category" required>
+                                   <select class="custom-select" name="blog_category" required id="blog_category">
                                      <option value="" >Select Category</option>
 
                                         <?php if($category){
@@ -208,7 +208,6 @@
                                   </div>
                                </div>
 
-
                                <div class="col-lg-6">
                                   <div class="form-group">
                                    <!-- <label for="simpleinput">Blog Tags</label>
@@ -230,6 +229,44 @@
                                     </select>
                                   </div>
                                </div>
+
+                               
+
+                               <div class="col-lg-6"  id="blog_tournament" style="display:none;">
+                                    <div class="form-group">
+                                          <label for="example-select">Tournament <span class="text-danger">*</span></label>                                       
+                                          <select class="custom-select" id="tournament" name="tournament" >
+                                                      <option value="">Select Tournament</option>  
+                                                      <?php foreach($tournaments as $tournament){ ?>  
+                                                         <option value="<?php echo $tournament->t_id;?>"<?php     
+                                                         if($tournament->t_id==$result->tournament)
+                                                            echo 'selected';
+                                                 ?>>      <?php echo $tournament->tournament_name; ?>   
+                                                 </option>
+                                       <?php } ?>                                     
+                                          </select> 
+                                    </div> 
+                              </div>
+
+                              <div class="col-lg-6" id="blog_team" style="display:none;">
+                                       <div class="form-group">
+                                             <label for="example-select">Team <span class="text-danger"></span></label>
+                                             <select multiple class="custom-select" id="team" name="team[]" required>
+                                                         <option value="">Select Team</option>  
+                                                         <?php foreach($teams as $team){?>
+                                          <option value="<?php echo $team->id;?>" <?php
+                                             $team_id = explode(',', $result->team);
+                                                if (in_array($team->id, $team_id)) {
+                                                   echo 'selected';
+                                                } ?>>      
+                                             <?php echo    $team->team_name  ; ?>                              
+                                       </option>
+                                       <?php } ?>                                                          
+                                             </select> 
+                                       </div> 
+                               </div>
+
+                              
 
 
 
@@ -282,6 +319,28 @@
 <?php $this->load->view(THEME.'common/footer'); ?>
 <script>
 
+
+$(document).ready(function(){ 
+
+      function handleBlogDisplay() {
+    var blog_type = $("#blog_type").val();
+    var blog_category = $("#blog_category").val();
+
+    if (blog_type === "2" && blog_category === "7") {
+        $('#blog_tournament, #blog_team').css("display", "block");
+        $("#tournament").prop('required', true);
+    } else {
+        $('#blog_tournament, #blog_team').css("display", "none");
+        $("#tournament").prop('required', false);
+    }
+}
+
+$('#blog_type, #blog_category').on('change', handleBlogDisplay);
+
+// Trigger the function initially to set the initial display
+      handleBlogDisplay();
+});
+
          function popitup(url,temp='')
        {
 
@@ -317,4 +376,5 @@
    
        new Choices(document.getElementById("choices-text-remove-button"), { delimiter: ",", editItems: !0, removeItemButton: !0 });
        const blog_tags = new Choices('#blog_tags', { delimiter: ",",editItems: !0,removeItemButton: !0,   searchFields: ['label', 'value'] ,allowSearch: true});
+       const teams = new Choices('#team', { delimiter: ",",editItems: !0,removeItemButton: !0,   searchFields: ['label', 'value'] ,allowSearch: true});
 </script>

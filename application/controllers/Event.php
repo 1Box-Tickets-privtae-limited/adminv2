@@ -178,7 +178,51 @@ class Event extends CI_Controller
 		return $this->data;
 	}
 
+public function ticket_logs($s_no)
+	{
 
+		if($s_no != ""){
+			$this->datas['s_no'] = $s_no;
+			$this->load->view(THEME.'tickets/ticket_logs', $this->datas);
+		}
+	}
+
+	public function get_ticket_log_list()
+	{
+		$search=[];
+		$row_per_page = 50;
+
+    $rowno = $_POST['start'];$where_array=[];$draw = $_POST['draw'];$data = [];  
+		
+		$query_inpt=$_POST['query'];
+		
+	$allcount = $this->General_Model->getAllItemTable('sell_tickets_history', 'ticket_no',$query_inpt)->num_rows();
+	
+		// Get records
+		$records = $this->General_Model->getAllItemTable('sell_tickets_history','ticket_no',$query_inpt, 'id', 'DESC')->result();
+
+	
+
+		foreach($records as $record ){
+			$ticket_msg = substr_replace($record->ticket_msg, "...", 100);
+			$data[] = array( 
+				"ticket_no"				=> 	$record->ticket_no,			
+				"log"					=> 	$ticket_msg,
+				"date"						=>	$record->created_date_time
+			);
+			
+	}
+		$result = array(
+            "draw" => $draw,
+              "recordsTotal" => $allcount,
+              "recordsFiltered" => $allcount,
+              "data" => $data
+         );
+
+		echo json_encode($result);
+		exit();
+
+	}
 	public function stadiums()
 	{
 
@@ -1960,6 +2004,9 @@ class Event extends CI_Controller
 
 				// echo "MATCHID:".$match_id;exit;
 				$this->data['event'] = $this->General_Model->getOtherEvents('', '', $row_no = '', $row_per_page = '', $orderColumn = '', $orderby = '', array('match_info.m_id' => $match_id))->row();
+				if(empty($this->data['event'])){
+					$this->data['event'] = $this->General_Model->getOtherEvents('', '', $row_no = '', $row_per_page = '', $orderColumn = '', $orderby = '', array('match_info.m_id' => $match_id),'',13)->row();
+				}
 
 
 				$this->data['matches'] = $this->General_Model->get_matches($match_id)->row();
@@ -2157,22 +2204,24 @@ class Event extends CI_Controller
 							$this->db->insert('banned_countries_match', $this->data);
 						}
 
-						$getStore=$this->General_Model->get_admin_details_by_role(4,'ACTIVE');
-						foreach($getStore as $store)
-						{
-						$lang = $this->General_Model->getAllItemTable('language', 'store_id', $this->session->userdata('storefront')->admin_id)->result();
-						foreach ($lang as $key => $l_code) {
-							$insertData_lang = array();
-							$insertData_lang['match_id'] = $match_id;
-							$insertData_lang['language'] = $l_code->language_code;
-							$insertData_lang['match_name'] = trim($this->input->post('eventname'));
-							$insertData_lang['meta_title'] = $this->input->post('metatitle');
-							$insertData_lang['meta_description'] = $this->input->post('metadescription');
-							$insertData_lang['event_image'] = $insertData['event_image'];
-							$insertData_lang['store_id'] = $store->admin_id;
-							$this->General_Model->insert_data('match_info_lang', $insertData_lang);
+						$getStore = $this->General_Model->get_admin_details_by_site_setting();
+						foreach ($getStore as $store) {
+							if ($store->store_id != 238) {
+								$lang = $this->General_Model->getAllItemTable('language', 'store_id', $this->session->userdata('storefront')->admin_id)->result();
+								foreach ($lang as $key => $l_code) {
+									$insertData_lang = array();
+									$insertData_lang['match_id'] = $match_id;
+									$insertData_lang['language'] = $l_code->language_code;
+									$insertData_lang['match_name'] = trim($this->input->post('eventname'));
+									$insertData_lang['extra_title'] = trim($this->input->post('extra_title'));
+									$insertData_lang['meta_title'] = $this->input->post('metatitle');
+									$insertData_lang['meta_description'] = $this->input->post('metadescription');
+									$insertData_lang['event_image'] = $insertData['event_image'];
+									$insertData_lang['store_id'] = $store->store_id;
+									$this->General_Model->insert_data('match_info_lang', $insertData_lang);
+								}
+							}
 						}
-					}
 						$encode_id = base64_encode(json_encode("$match_id"));
 
 
@@ -2248,6 +2297,7 @@ class Event extends CI_Controller
 						$updateData = array();
 
 						if ($_POST['flag'] != "content") {
+
 							$updateData_lang = array();
 							if (!empty($_FILES['event_image']['name'])) {
 								$mdata = $this->General_Model->getAllItemTable_array('match_info', array('m_id' => $matchId))->row();
@@ -2361,10 +2411,17 @@ class Event extends CI_Controller
 								}
 							$this->General_Model->update('match_info', array('m_id' => $matchId), $updateData);
 
+							$getStore = $this->General_Model->get_admin_details_by_site_setting();
+							foreach ($getStore as $store) {
+								if ($store->store_id != 238) {
+									//$lang = $this->General_Model->getAllItemTable('language', 'store_id', $this->session->userdata('storefront')->admin_id)->result();
+								//	foreach ($lang as $key => $l_code) {
+										$updateData_lang['match_name'] = trim($this->input->post('eventname'));
+										$this->General_Model->update('match_info_lang', array('match_id' => $matchId, 'language' => $this->session->userdata('language_code'),'store_id'=>$store->store_id), $updateData_lang);
 
-
-							$updateData_lang['match_name'] = trim($this->input->post('eventname'));
-							$this->General_Model->update('match_info_lang', array('match_id' => $matchId, 'language' => $this->session->userdata('language_code'),'store_id'=>$this->session->userdata('storefront')->admin_id), $updateData_lang);
+									//}
+								}
+							}
 
 							$this->db->delete('banned_countries_match', array('match_id' => $matchId));
 							$bancountry_ids = $this->input->post('bcountry');
