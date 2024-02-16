@@ -2005,7 +2005,7 @@ $("body").on('click',' #transfer_email',function(e){
      var ischecked= $(this).is(':checked');	
 	 var booking_status='<?php echo $orderData->booking_status;?>';
 	 var source_type='<?php echo $orderData->source_type;?>';
-     if(ischecked && (booking_status==4 ||booking_status==5) && (source_type=="1boxoffice"))
+     if(ischecked && (booking_status==4 ||booking_status==5))
 		{
 
 			var data_title = $(this).attr('data-title');
