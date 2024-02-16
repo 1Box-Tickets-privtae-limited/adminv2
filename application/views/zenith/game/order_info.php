@@ -2033,7 +2033,8 @@ $("body").on('click',' #transfer_email',function(e){
 		}
 		else
 		{
-			swal('', "The Booking Status is 'Delivered' or 'Shipped,' and the Transfer is working.", 'error');
+			swal('', "Booking Status must be in Delivered or Shipped Status to send transfer mail", 'error');
+			
 			$(this).prop('checked', false);	
 		}
 }); 
