@@ -3077,7 +3077,7 @@ public function get_order_status(){
 				if($order->source_type == "tixstock"){
 
 
-					if($order->source_type == "tixstock" && ($order->bg_id == "28725")){
+					if($order->source_type == "tixstock" && ($order->bg_id == "32029")){
 					$url = base_url().'tixstock/orderConfirm';
 					$post_data = array("bg_id" => $order->bg_id,"tixstock_status" => 'Commissionable');
 					$handle = curl_init();

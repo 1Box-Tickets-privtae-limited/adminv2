@@ -166,9 +166,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
-                                             <?php if($this->session->userdata('role') != 7){?>
                                              <div class="column is-12">
                                                 <div class="field">
                                                     <label>Meta Title *</label>
@@ -185,10 +182,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <?php }else{ ?>
-                                             <textarea class="textarea" rows="4" placeholder="Meta Title" name="meta_title" style="display: none;"><?php echo $result->meta_title;?></textarea>
-                                              <textarea class="textarea" rows="4" placeholder="Meta Description" name="meta_description" style="display: none;"><?php echo $result->meta_description;?></textarea>
-                                        <?php } ?>
                                             
                                         <div class="column is-12">
                                             <div class="field">

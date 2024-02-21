@@ -4419,7 +4419,7 @@ public function getOrderData_v2()
 		// if($this->store_id){
 		// 	$this->db->where('booking_global.store_id', $this->store_id);
 		// }
-
+		$this->db->group_by("booking_global.bg_id");
 		$this->db->order_by("match_date_new ASC ,booking_tickets.match_date ASC");
 		
 		if ($row_per_page != '') {
@@ -5157,6 +5157,7 @@ public function getOrderData_v2()
 		if ($row_per_page != '') {
 			$this->db->limit($row_per_page, $row_no);
 		}
+		$this->db->group_by("booking_global.bg_id");
 		$this->db->order_by("match_date_new ASC ,booking_tickets.match_date ASC");
 		$qry = $this->db->get();
 	//	echo $this->db->last_query();exit;
@@ -5493,9 +5494,9 @@ public function getOrderData_v2()
 	{
 		$this->db->select('booking_etickets.*,booking_etickets.id as eticket_id,booking_tickets.*,booking_global.*,admin_details.admin_name,admin_details.admin_last_name');
 		$this->db->from('booking_etickets');
-		$this->db->join('booking_tickets', 'booking_tickets.booking_id = booking_etickets.booking_id');
-		$this->db->join('booking_global', 'booking_global.bg_id = booking_tickets.booking_id');
-		$this->db->join('sell_tickets', 'sell_tickets.s_no = booking_tickets.ticket_id');
+		$this->db->join('booking_tickets', 'booking_tickets.booking_id = booking_etickets.booking_id', 'LEFT');
+		$this->db->join('booking_global', 'booking_global.bg_id = booking_tickets.booking_id', 'LEFT');
+		$this->db->join('sell_tickets', 'sell_tickets.s_no = booking_tickets.ticket_id', 'LEFT');
 		$this->db->join('admin_details', 'admin_details.admin_id=booking_global.seller_id', 'LEFT');
 		if ($this->session->userdata('role') == 1) { 
 			$this->db->where('sell_tickets.add_by', $this->session->userdata('admin_id'));
@@ -5519,7 +5520,7 @@ public function getOrderData_v2()
 				$this->db->where('booking_tickets.match_date <', date("Y-m-d", strtotime($search['event_end_date'])));
 			} 
 			else
-				$this->db->where('booking_tickets.match_date > ', date("2023-02-01"));
+				$this->db->where('booking_tickets.match_date > ', date("2024-02-16"));
 
 			if(!empty($search['event_name']))				
 				$this->db->like('booking_tickets.match_name', $search['event_name']);
@@ -5571,9 +5572,9 @@ public function getOrderData_v2()
 	{
 		$this->db->select('booking_ticket_tracking.*,booking_tickets.*,booking_global.*,admin_details.admin_name,admin_details.admin_last_name,booking_ticket_tracking.*,booking_ticket_tracking.pod_status as ticket_status');
 		$this->db->from('booking_ticket_tracking');
-		$this->db->join('booking_tickets', 'booking_tickets.booking_id = booking_ticket_tracking.booking_id');
-		$this->db->join('booking_global', 'booking_global.bg_id = booking_tickets.booking_id');
-		$this->db->join('sell_tickets', 'sell_tickets.s_no = booking_tickets.ticket_id');
+		$this->db->join('booking_tickets', 'booking_tickets.booking_id = booking_ticket_tracking.booking_id', 'LEFT');
+		$this->db->join('booking_global', 'booking_global.bg_id = booking_tickets.booking_id', 'LEFT');
+		$this->db->join('sell_tickets', 'sell_tickets.s_no = booking_tickets.ticket_id', 'LEFT');
 		$this->db->join('admin_details', 'admin_details.admin_id=booking_global.seller_id', 'LEFT');
 		if ($this->session->userdata('role') == 1) { 
 			$this->db->where('sell_tickets.add_by', $this->session->userdata('admin_id'));
@@ -5593,7 +5594,7 @@ public function getOrderData_v2()
 				$this->db->where('booking_tickets.match_date <', date("Y-m-d", strtotime($search['event_end_date'])));
 			} 
 			else
-				$this->db->where('booking_tickets.match_date > ', date("2023-02-01"));
+				$this->db->where('booking_tickets.match_date > ', date("2024-02-16"));
 
 			if(!empty($search['event_name']))				
 			$this->db->like('booking_tickets.match_name', $search['event_name']);

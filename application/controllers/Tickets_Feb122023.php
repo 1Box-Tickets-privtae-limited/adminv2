@@ -409,7 +409,7 @@ public function get_items()
 		  	$approve_request_etciket = $this->General_Model->ticket_approve_request('pending')->result();
 		  	$approve_request_pod = $this->General_Model->ticket_approve_request_pod('pending')->result();//echo "<pre>";print_r($approve_request_etciket);exit;
 		  	$approve_request = array_merge($approve_request_etciket, $approve_request_pod);
-		  	//usort($approve_request, array($this,'cmp'));
+		  	usort($approve_request, array($this,'cmp'));
 
 			$records = $this->General_Model->get_seller_name()->result();
 			foreach($records as $record ){
@@ -433,7 +433,7 @@ public function get_items()
 		  	$approve_request_pod = $this->General_Model->ticket_approve_request_pod('approved')->result();
 		  	//echo "<pre>";print_r($approve_request_pod);exit;
 		  	$approve_request = array_merge($approve_request_etciket, $approve_request_pod);
-		  	//usort($approve_request, array($this,'cmp'));
+		  	usort($approve_request, array($this,'cmp'));
 		  		//echo "<pre>";print_r($approve_request);exit;
 		  	$this->data['approve_request'] = $approve_request;
 		   }
@@ -441,14 +441,14 @@ public function get_items()
 		  	$approve_request_etciket = $this->General_Model->ticket_approve_request('rejected')->result();
 		  	$approve_request_pod = $this->General_Model->ticket_approve_request_pod('rejected')->result();//echo "<pre>";print_r($approve_request_pod);exit;
 		  	$approve_request = array_merge($approve_request_etciket, $approve_request_pod);
-		  	//usort($approve_request, array($this,'cmp'));
+		  	usort($approve_request, array($this,'cmp'));
 		  	$this->data['approve_request'] = $approve_request;
 		   }
 		   else if($segment4 == "downloaded"){
 		  	$approve_request_etciket = $this->General_Model->ticket_approve_request('downloaded')->result();
 		  	$approve_request_pod = $this->General_Model->ticket_approve_request_pod('downloaded')->result();
 		  	$approve_request = array_merge($approve_request_etciket, $approve_request_pod);
-		  	//usort($approve_request, array($this,'cmp'));
+		  	usort($approve_request, array($this,'cmp'));
 		  	$this->data['approve_request'] = $approve_request;
 		   }
 		  /*if($segment4 == "approve_reject"){
@@ -2937,7 +2937,7 @@ public function get_items()
 				$price_type= strtoupper($list_ticket->price_type); 
 				}
 
-				$edit_url= base_url()."tickets/index/listing_details/".$list_ticket->match_id;
+				$edit_url= base_url()."tickets/index/listing_oe_details/".$list_ticket->match_id;
 
 			 $action					=	'<div class="dropdown">
 											<a href="javascript:void(0)" class="btn-icon btn-icon-sm btn-icon-soft-primary" data-toggle="dropdown">
