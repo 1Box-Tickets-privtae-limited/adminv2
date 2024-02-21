@@ -426,10 +426,10 @@
                                        </div> 
                                        <div class="col-lg-4">
                                           <div class="form-group">
-                                              <label for="example-select">City<span class="text-danger">*</span></label>
+                                              <label for="example-select">City</label>
                                               <?php $cityArray = $this->General_Model->get_state_cities($matches->country);
                                                     ?>                                                
-                                                 <select class="custom-select" id="city" name="city" required>
+                                                 <select class="custom-select" id="city" name="city" >
                                                             <option value="">Select City</option>
                                                             <?php
 

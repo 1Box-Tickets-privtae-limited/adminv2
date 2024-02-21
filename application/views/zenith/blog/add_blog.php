@@ -174,12 +174,6 @@
                                   </div>
                                </div>
 
-                            
-
-
-                             <?php if($this->session->userdata('role') != 7){?>
-
-
                                 <div class="col-lg-12">
                                   <div class="form-group">
                                    <label for="simpleinput">Meta Title <span class="text-danger">*</span></label>
@@ -194,12 +188,6 @@
                                     <textarea class="form-control" rows="4" placeholder="Meta Description" name="meta_description" ><?php echo $blog_lang->meta_description;?></textarea>
                                   </div>
                                </div>
-
-
-                                  <?php }else{ ?>
-                                             <textarea class="form-control" rows="4" placeholder="Meta Title" name="meta_title" style="display: none;"><?php echo $blog_lang->meta_title;?></textarea>
-                                              <textarea class="form-control" rows="4" placeholder="Meta Description" name="meta_description" style="display: none;"><?php echo $blog_lang->meta_description;?></textarea>
-                                        <?php } ?>
 
                                   <div class="col-lg-6">
                                   <div class="form-group">

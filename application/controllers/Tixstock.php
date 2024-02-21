@@ -1024,12 +1024,22 @@ function webhooks()
     if($yourHash == $_SERVER['HTTP_X_TIXSTOCK_SIGNATURE']){
 
         $fp = fopen("tix_logs/webhooks/signature/verified_request.json", 'a+');
-        fwrite($fp, 'siva');
+        fwrite($fp, json_encode($_SERVER));
         fclose($fp);
 
     }
+    else{
+        $fp = fopen("tix_logs/webhooks/signature/unverified_request.json", 'a+');
+        fwrite($fp, json_encode($_SERVER));
+        fclose($fp);
+    }
 
     $tixstock_response = json_decode($payload, true);
+
+    $time = time().time();
+    $fp = fopen("tix_logs/webhooks/logs/".$time.'_log.txt', 'a+');
+    fwrite($fp, json_encode(@$_REQUEST));
+    fclose($fp);
 
     /*$time = time();
     $fp = fopen("tix_logs/webhooks/".$webhooks_type."/".$time.'_request.json', 'a+');
@@ -1347,7 +1357,7 @@ function webhooks()
         $mobile_links                      = $tixstock_response['data']['mobile_links'];
 
 
-        $serial = $this->General_Model->getAllItemTable_Array('booking_etickets', array('booking_id' => $booking->bg_id,'qr_link' => ''))->num_rows();
+        $serial = $this->General_Model->getAllItemTable_Array('booking_etickets', array('booking_id' => $booking->bg_id,'qr_link' => NULL))->num_rows();
 
         $file_name = $booking->booking_no;
         $fp = fopen("tix_logs/webhooks/".$webhooks_type."/".$file_name.'_request.json', 'a+');
@@ -1378,9 +1388,11 @@ function webhooks()
 
                 if(!empty($mobile_link)){
 
+                  $serial = $this->General_Model->getAllItemTable_Array('booking_etickets', array('booking_id' => $booking->bg_id,'qr_link' => NULL))->num_rows();
+
                 $table                     = "booking_etickets";
-                $wheresv1                  = array('booking_id' => $booking->bg_id,'qr_link' => '','serial' => trim(@$mobile_link['seat']));
-                $uvalue                    = array('qr_link' => trim(@$mobile_link['link']),'ticket_status' => 1,'seat' => $seat);
+                $wheresv1                  = array('booking_id' => $booking->bg_id,'qr_link' => NULL,'serial' => $serial);
+                $uvalue                    = array('qr_link' => trim(@$mobile_link['link']),'ticket_status' => 1,'seat' => trim(@$mobile_link['seat']));
                 $ticket_update             =  $this->Tixstock_Model->update_table($table, $wheresv1, $uvalue);
 
                 }
@@ -1394,7 +1406,7 @@ function webhooks()
 
             $updated_tickets = $uploaded_tickets_count + $approved_tickets_count;
 
-            $pending_tickets = $this->General_Model->getAllItemTable_Array('booking_etickets', array('booking_id' => $booking->bg_id,'qr_link' => ''))->num_rows();
+            $pending_tickets = $this->General_Model->getAllItemTable_Array('booking_etickets', array('booking_id' => $booking->bg_id,'qr_link' => NULL))->num_rows();
 
              if($updated_tickets == $total_tickets){
 
