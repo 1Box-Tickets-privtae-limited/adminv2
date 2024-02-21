@@ -97,7 +97,6 @@
                                                              <a data-ticket-id="<?php echo $ticket->s_no; ?>" href="javascript:void(0);" class="edit_ticket dropdown-item edit_ticket_btn">Edit</a>
                                                             <a data-ticket-id="<?php echo $ticket->s_no; ?>" href="javascript:void(0);" class="ticket_clone dropdown-item edit_clone_info">Clone </a>
                                                             <a href="javascript:void(0);" data-match="<?php echo $ticket->match_id; ?>" data-s_no="<?php echo $ticket->s_no; ?>" data-ticket="<?php echo $ticket->ticketid; ?>" id="ticket-delete-<?php echo $ticket->ticketid; ?>" class="dropdown-item ticket_delete">Delete </a>
-                                                            <a  target="_blank" href="<?php echo base_url();?>event/ticket_logs/<?php echo $ticket->s_no; ?>" class="dropdown-item">Ticket Logs </a>
                                                          </div>
                                                       </div>
                                                    </td>
