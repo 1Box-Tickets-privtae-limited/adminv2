@@ -11,8 +11,8 @@ class Curl{
        $CI->load->library('session');
        $CI->load->database();
        //$this->url = "http://phplaravel-775269-2637853.cloudwaysapps.com/api/";
-//      $this->url = "https://api2.listmyticket.com/storefront/"; // last one used.
-      $this->url = "https://phpstack-892245-3420498.cloudwaysapps.com/api_v3/storefront/";
+      $this->url = "https://api2.listmyticket.com/storefront/";
+     // $this->url = "https://phpstack-892245-3420498.cloudwaysapps.com/api_v3/storefront/";
       // $this->url = "http://phplaravel-871000-3013214.cloudwaysapps.com/api2/api/";
     }
 
